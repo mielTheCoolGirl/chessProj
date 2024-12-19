@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#define LOWER_LET_TO_NUM 49
 //taking only the class since we dont need all the board's traits just the board itself
 class Board;
 
