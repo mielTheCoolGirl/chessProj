@@ -12,6 +12,8 @@ private:
 
 public:
 	Piece* board[BOARD_LEN][BOARD_LEN];
-	void printBoard();
+	void printBoard()const;
+	int getIsChecking()const;
+	void setIsChecking(int state);
 	bool checkDanger(Piece* king);
 };
