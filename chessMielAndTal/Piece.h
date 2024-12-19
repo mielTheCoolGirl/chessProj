@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
-#include "Board.h"
-
+//taking only the class since we dont need all the board's traits just the board itself
 class Board;
 
 class Piece
@@ -11,11 +10,11 @@ protected:
 	std::string _currentCoords;
 public:
 	Piece(char type,std::string currentCoords);
-	~Piece();
+	virtual ~Piece();
 
-	virtual void eat(std::string endCoords)=0;
+	void eat(std::string endCoords);
 	//checks legal movement on board
-	virtual bool legalMovement()=0;
+	virtual bool legalMovement() = 0;
 
 	//moves on board
 	virtual void move(Board& board)=0;

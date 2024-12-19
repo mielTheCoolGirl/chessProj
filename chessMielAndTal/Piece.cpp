@@ -4,6 +4,10 @@ Piece::Piece(char type, std::string currentCoords): _type(type),_currentCoords(c
 {
 }
 
+Piece::~Piece()
+{
+}
+
 std::string Piece::lettersToCoords(std::string coords)
 {
     char firstLetter = coords[0];

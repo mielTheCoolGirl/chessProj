@@ -15,7 +15,7 @@ Board::Board()
 		char res = char(i + A_VALUE);
 		std::string coordsStr = "2";
 		coordsStr += res;
-		board[1][i] = new Piece('P',  coordsStr);
+		board[1][i] = new Rook('R',  coordsStr);
 		
 	}
 	for (int i = 0; i < BOARD_LEN; i++)
@@ -23,7 +23,7 @@ Board::Board()
 		char res = char(i + A_VALUE);
 		std::string coordsStr = "6";
 		coordsStr += res;
-		board[6][i] = new Piece('p', coordsStr);
+		board[6][i] = new Rook('r', coordsStr);
 	}
 	
 }

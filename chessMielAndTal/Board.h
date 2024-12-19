@@ -2,6 +2,7 @@
 #define BOARD_LEN 8
 #include <iostream>
 #include "Piece.h"
+#include "LinearMovement.h"
 #include "Rook.h"
 #include "Bishop.h"
 

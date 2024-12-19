@@ -1,8 +1,14 @@
 #pragma once
 #include "Piece.h"
+//since board includes piece
+class Board;
 
 class LinearMovement: public Piece
 {
-	void move(Board& board);
+public:
+	LinearMovement(char linearPieceType, std::string coords);
+	~LinearMovement();
+	void move(Board& board) override;
+	bool legalMovement() override;
 
 };
