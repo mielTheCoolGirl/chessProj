@@ -70,6 +70,7 @@ std::string Piece::lettersToCoords(std::string coords)
     default:
         coords[2] = '!';
     }
+    return coords;
 }
 
 char Piece::getType() const
