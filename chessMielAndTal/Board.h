@@ -2,6 +2,8 @@
 #define BOARD_LEN 8
 #include <iostream>
 #include "Piece.h"
+#include "Rook.h"
+#include "Bishop.h"
 
 class Piece;
 

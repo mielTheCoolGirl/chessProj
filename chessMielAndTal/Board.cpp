@@ -1,12 +1,15 @@
 #include "Board.h"
+
 #define A_VALUE 97
 Board::Board()
 {
+	
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
 		for (int j=0;j<BOARD_LEN;j++)
 			board[i][j] = nullptr;
 	}
+	//putting all the pawns in place
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
 		char res = char(i + A_VALUE);

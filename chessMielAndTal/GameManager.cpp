@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "Board.h"
 
 bool GameManager::getCurrentPlayer() const
 {
@@ -16,4 +17,10 @@ void GameManager::switchPlayer()
 		_currentPlayer = true;
 	else
 		_currentPlayer = false;
+}
+
+void GameManager::mainGame()
+{
+	Board b =Board();
+	b.printBoard();
 }
