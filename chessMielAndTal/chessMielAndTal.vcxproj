@@ -139,6 +139,7 @@
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="LinearMovement.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Piece.cpp" />

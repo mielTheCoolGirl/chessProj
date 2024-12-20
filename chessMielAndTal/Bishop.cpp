@@ -1,6 +1,6 @@
 #include "Bishop.h"
 
-Bishop::Bishop(const char& bishopType, const string& coords, const bool& color) : 
+Bishop::Bishop(const char& bishopType, const std::string& coords, const bool& color) : 
 	LinearMovement(bishopType, coords, color)
 {
 }
@@ -9,10 +9,10 @@ Bishop::~Bishop()
 {
 }
 
-bool Bishop::legalMovement(const string& dstCoords) const
+bool Bishop::legalMovement(const std::string& dstCoords) const
 {
 	int x1, x2, y1, y2, slope;
-	string coordsCalc= lettersToCoords(dstCoords);
+	std::string coordsCalc= lettersToCoords(dstCoords);
 	x1 = coordsCalc[0]-'0';
 	y1 = coordsCalc[1] - '0';
 	x2 = coordsCalc[2] - '0';

@@ -25,10 +25,10 @@ void GameManager::mainGame()
 	b.printBoard();
 }
 
-bool GameManager::turnExpn(const string& coords, const Board& board)
+bool GameManager::turnExpn(const std::string& coords, const Board& board)
 {
-	string src = "";
-	string dst = "";
+	std::string src = "";
+	std::string dst = "";
 	if (coords.length() != 4)
 	{
 		throw int(5);

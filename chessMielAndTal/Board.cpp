@@ -1,5 +1,5 @@
 #include "Board.h"
-
+#include "Rook.h"
 #define A_VALUE 97
 #define WHITE 1
 #define BLACK 0
