@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Board.h"
+
 #define LOWER_LET_TO_NUM 49
 //taking only the class since we dont need all the board's traits just the board itself
 using namespace std;
@@ -11,8 +11,9 @@ class Piece
 protected:
 	char _type;
 	std::string _currentCoords;
+	bool _color;
 public:
-	Piece(const char& type, const string& currentCoords);
+	Piece(const char& type, const string& currentCoords, const bool& color);
 	virtual ~Piece();
 
 	void eat(const string& endCoords);

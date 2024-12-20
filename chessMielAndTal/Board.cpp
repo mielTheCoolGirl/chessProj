@@ -1,6 +1,8 @@
 #include "Board.h"
 
 #define A_VALUE 97
+#define WHITE 1
+#define BLACK 0
 Board::Board()
 {
 	
@@ -15,7 +17,7 @@ Board::Board()
 		char res = char(i + A_VALUE);
 		std::string coordsStr = "2";
 		coordsStr += res;
-		board[1][i] = new Rook('R',  coordsStr);
+		board[1][i] = new Rook('R',  coordsStr, WHITE);
 		
 	}
 	for (int i = 0; i < BOARD_LEN; i++)
@@ -23,7 +25,7 @@ Board::Board()
 		char res = char(i + A_VALUE);
 		std::string coordsStr = "6";
 		coordsStr += res;
-		board[6][i] = new Rook('r', coordsStr);
+		board[6][i] = new Rook('r', coordsStr, BLACK);
 	}
 	
 }

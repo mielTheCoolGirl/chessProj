@@ -1,6 +1,7 @@
 #include "Bishop.h"
 
-Bishop::Bishop(const char& bishopType, const string& coords) : LinearMovement(bishopType, coords)
+Bishop::Bishop(const char& bishopType, const string& coords, const bool& color) : 
+	LinearMovement(bishopType, coords, color)
 {
 }
 

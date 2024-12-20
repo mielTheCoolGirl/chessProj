@@ -1,6 +1,7 @@
 #include "Piece.h"
 
-Piece::Piece(const char& type, const string& currentCoords): _type(type),_currentCoords(currentCoords)
+Piece::Piece(const char& type, const string& currentCoords, const bool& color): 
+    _color(color), _type(type),_currentCoords(currentCoords)
 {
 }
 

@@ -1,6 +1,7 @@
 #include "LinearMovement.h"
 
-LinearMovement::LinearMovement(char linearPieceType, std::string coords):Piece(linearPieceType, coords)
+LinearMovement::LinearMovement(char linearPieceType, std::string coords, const bool& color) : 
+	Piece(linearPieceType, coords, color)
 {
 
 }

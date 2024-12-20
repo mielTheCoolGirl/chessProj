@@ -42,6 +42,6 @@ bool GameManager::turnExpn(const string& coords, const Board& board)
 	{
 		throw int(5);
 	}
-	
+	//if(board.board[src[0]][src[1]] != _)
 
 }
