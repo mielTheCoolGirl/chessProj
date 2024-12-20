@@ -1,6 +1,6 @@
 #include "Piece.h"
 
-Piece::Piece(char type, std::string currentCoords): _type(type),_currentCoords(currentCoords)
+Piece::Piece(const char& type, const string& currentCoords): _type(type),_currentCoords(currentCoords)
 {
 }
 
@@ -8,11 +8,13 @@ Piece::~Piece()
 {
 }
 
-std::string Piece::lettersToCoords(std::string coords)
+std::string Piece::lettersToCoords(string& coords)
 {
     coords[0] -= LOWER_LET_TO_NUM;
     return coords;
 }
+
+
 
 char Piece::getType() const
 {
@@ -24,13 +26,13 @@ std::string Piece::getCurrentCoords() const
     return _currentCoords;
 }
 
-void Piece::setType(char newType)
+void Piece::setType(const char& newType)
 {
-    _type = newType;
+    this->_type = newType;
 }
 
-void Piece::setCurrentCoords(std::string newCoords)
+void Piece::setCurrentCoords(const string& newCoords)
 {
-    _currentCoords = newCoords;
+    this->_currentCoords = newCoords;
 }
 

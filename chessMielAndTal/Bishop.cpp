@@ -1,12 +1,14 @@
 #include "Bishop.h"
-Bishop::Bishop(char bishopType, std::string coords) :LinearMovement(bishopType, coords)
-{
 
+Bishop::Bishop(const char& bishopType, const string& coords) : LinearMovement(bishopType, coords)
+{
 }
+
 Bishop::~Bishop()
 {
 }
-bool Bishop::legalMovement()
+
+bool Bishop::legalMovement(const string& dstCoords) const
 {
-    return false;
+	return false;
 }

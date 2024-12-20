@@ -4,7 +4,7 @@
 class Rook : public LinearMovement
 {
 public:
-	Rook(char rookType, std::string coords);
+	Rook(const char& rookType, const std::string& coords);
 	~Rook();
-	bool legalMovement();
+	bool legalMovement(const string& dstCoords)const override;
 };

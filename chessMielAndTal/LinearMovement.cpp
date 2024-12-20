@@ -11,7 +11,7 @@ void LinearMovement::move(Board& board)
 {
 }
 
-bool LinearMovement::legalMovement()
+bool LinearMovement::legalMovement(const string& dstCoords)const
 {
 	return false;
 }

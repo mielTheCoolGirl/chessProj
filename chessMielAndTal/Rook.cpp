@@ -1,5 +1,5 @@
 #include "Rook.h"
-Rook::Rook(char rookType, std::string coords):LinearMovement(rookType,coords)
+Rook::Rook(const char& rookType, const string& coords): LinearMovement(rookType,coords)
 {
 
 }
@@ -8,7 +8,7 @@ Rook::~Rook()
 {
 }
 
-bool Rook::legalMovement()
+bool Rook::legalMovement(const string& dstCoords)const
 {
-	return false;
+	
 }

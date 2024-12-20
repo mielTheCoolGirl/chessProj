@@ -4,8 +4,8 @@
 class Bishop : public LinearMovement
 {
 public:
-	Bishop(char bishopType, std::string coords);
+	Bishop(const char& bishopType, const string& coords);
 	~Bishop();
-	bool legalMovement();
+	bool legalMovement(const string& dstCoords)const override;
 };
 

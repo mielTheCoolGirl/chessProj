@@ -9,6 +9,6 @@ public:
 	LinearMovement(char linearPieceType, std::string coords);
 	~LinearMovement();
 	void move(Board& board) override;
-	bool legalMovement() override;
+	bool legalMovement(const string& dstCoords)const override;
 
 };
