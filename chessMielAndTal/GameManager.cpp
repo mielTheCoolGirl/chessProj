@@ -42,6 +42,14 @@ bool GameManager::turnExpn(const string& coords, const Board& board)
 	{
 		throw int(5);
 	}
-	//if(board.board[src[0]][src[1]] != _)
+	else if (board.board[src[0]][src[1]]->getColor() != this->_currentPlayer)
+	{
+		throw int(2);
+	}
+	else if (board.board[dst[0]][dst[1]]->getColor() == this->_currentPlayer)
+	{
+		throw int(3);
+	}
+
 
 }

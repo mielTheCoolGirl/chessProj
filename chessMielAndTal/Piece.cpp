@@ -37,3 +37,13 @@ void Piece::setCurrentCoords(const string& newCoords)
     this->_currentCoords = newCoords;
 }
 
+bool Piece::getColor() const
+{
+    return _color;
+}
+
+void Piece::setColor(const bool& color)
+{
+    _color = color;
+}
+

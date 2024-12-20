@@ -33,4 +33,6 @@ public:
 
 	void setCurrentCoords(const string& newCoords);
 
+	bool getColor()const;
+	void setColor(const bool& color);
 };

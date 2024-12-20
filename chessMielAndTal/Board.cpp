@@ -61,3 +61,8 @@ void Board::setIsChecking(int state)
 {
 	_isChecking = state;
 }
+
+bool Board::checkDanger(Piece* king)
+{
+	return false;
+}
