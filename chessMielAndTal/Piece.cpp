@@ -12,8 +12,8 @@ Piece::~Piece()
 
 std::string Piece::lettersToCoords(std::string coords)
 {
-    coords[0] -= LOWER_LET_TO_NUM;
-    return coords;
+    int letterToNum = coords[0] - LOWER_LET_TO_NUM;
+    return std::to_string(letterToNum)+coords[1];
 }
 
 

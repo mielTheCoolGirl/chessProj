@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "Board.h"
-#define LOWER_LET_TO_NUM 49
+#define LOWER_LET_TO_NUM 97
 
 class Board;
 
@@ -15,7 +15,7 @@ public:
 	Piece(const char& type, const std::string& currentCoords, const bool& color);
 	virtual ~Piece();
 
-	virtual void eat(const std::string& endCoords)=0;
+	virtual void eat(Board & board, const std::string & endCoords)=0;
 	//checks legal movement on board
 	virtual bool legalMovement(const std::string& dstCoords) const = 0;
 

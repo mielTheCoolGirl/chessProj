@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "Rook.h"
+#include "King.h"
 #define A_VALUE 97
 #define WHITE 1
 #define BLACK 0
@@ -27,6 +28,8 @@ Board::Board(): _isChecking(0)
 		coordsStr += res;
 		board[6][i] = new Rook('r', coordsStr, BLACK);
 	}
+	board[7][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
+
 	
 }
 

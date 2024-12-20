@@ -21,7 +21,9 @@ void GameManager::switchPlayer()
 
 void GameManager::mainGame()
 {
-	Board b =Board();
+	Board b;
+	b.printBoard();
+	b.board[7][0]->move(b,"g0");
 	b.printBoard();
 }
 

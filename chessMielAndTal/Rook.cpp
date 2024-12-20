@@ -8,15 +8,15 @@ Rook::~Rook()
 {
 }
 
-void Rook::eat(const std::string& endCoords)
+void Rook::eat(Board & board, const std::string & endCoords)
 {
 }
 
 
 bool Rook::legalMovement(const std::string& dstCoords)const
 {
-	//if the rook dosnt move in a line
-	if (!(dstCoords[0] == dstCoords[2] || dstCoords[1] == dstCoords[3]))
+	//if the rook doesnt move in a line
+	if (!(dstCoords[0] == _currentCoords[0] || dstCoords[1] == _currentCoords[1]))
 	{
 		return false;
 	}

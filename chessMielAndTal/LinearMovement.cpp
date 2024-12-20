@@ -11,6 +11,6 @@ void LinearMovement::move(Board& board, std::string dstCoords)
 {
 }
 
-void LinearMovement::eat(const std::string& endCoords)
+void LinearMovement::eat(Board & board, const std::string & endCoords)
 {
 }
