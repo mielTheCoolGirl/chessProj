@@ -10,3 +10,7 @@ LinearMovement::~LinearMovement()
 void LinearMovement::move(Board& board, std::string dstCoords)
 {
 }
+
+void LinearMovement::eat(const std::string& endCoords)
+{
+}

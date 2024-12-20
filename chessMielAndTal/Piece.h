@@ -15,7 +15,7 @@ public:
 	Piece(const char& type, const std::string& currentCoords, const bool& color);
 	virtual ~Piece();
 
-	void eat(const std::string& endCoords);
+	virtual void eat(const std::string& endCoords)=0;
 	//checks legal movement on board
 	virtual bool legalMovement(const std::string& dstCoords) const = 0;
 

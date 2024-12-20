@@ -7,6 +7,11 @@ King::~King()
 {
 }
 
+void King::eat(const std::string& endCoords)
+{
+	std::cout << "munch munch";
+}
+
 void King::move(Board& board, std::string dstCoords)
 {
 	int x1, x2, y1, y2;
@@ -21,6 +26,10 @@ void King::move(Board& board, std::string dstCoords)
 		if (board.board[y2][x2]->getColor() != this->getColor())
 		{
 			eat(dstCoords);
+		}
+		else
+		{
+			throw std::string("Exit Code 3- Improper move, in the target slot there is a tool of the current player");
 		}
 	}
 

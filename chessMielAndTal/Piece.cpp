@@ -9,9 +9,6 @@ Piece::~Piece()
 {
 }
 
-void Piece::eat(const std::string& endCoords)
-{
-}
 
 std::string Piece::lettersToCoords(std::string coords)
 {
