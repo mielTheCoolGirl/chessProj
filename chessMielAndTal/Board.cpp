@@ -3,7 +3,7 @@
 #define A_VALUE 97
 #define WHITE 1
 #define BLACK 0
-Board::Board()
+Board::Board(): _isChecking(0)
 {
 	
 	for (int i = 0; i < BOARD_LEN; i++)
