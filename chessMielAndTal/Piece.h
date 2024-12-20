@@ -23,7 +23,7 @@ public:
 	virtual void move(Board& board)=0;
 
 	
-	static std::string lettersToCoords(string& coords);
+	static std::string lettersToCoords(string coords);
 	char getType()const;
 
 	std::string getCurrentCoords()const;

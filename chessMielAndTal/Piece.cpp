@@ -8,7 +8,7 @@ Piece::~Piece()
 {
 }
 
-std::string Piece::lettersToCoords(string& coords)
+std::string Piece::lettersToCoords(string coords)
 {
     coords[0] -= LOWER_LET_TO_NUM;
     return coords;

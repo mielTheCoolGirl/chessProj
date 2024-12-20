@@ -37,7 +37,7 @@ void Board::printBoard() const
 	std::string boardRes = "";
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
-		for (int j = 0; j < BOARD_LEN; j++)
+		for (int j = BOARD_LEN-1; j >=0; j--)
 		{
 			if (board[i][j] == nullptr)
 				boardRes += "#";
