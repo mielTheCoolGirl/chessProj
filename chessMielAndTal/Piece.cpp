@@ -12,8 +12,9 @@ Piece::~Piece()
 
 std::string Piece::lettersToCoords(std::string coords)
 {
-    int letterToNum = BOARD_LEN - (coords[0] - LOWER_LET_TO_NUM) - 1;
-    return std::to_string(letterToNum) + char(int(coords[1]) - 1);
+    int letterToNum = coords[0] - LOWER_LET_TO_NUM;
+    int yAxis = BOARD_LEN - (coords[1] - ASC_NUM_TO_NUM);
+    return  std::to_string(yAxis) + std::to_string(letterToNum);
 }
 
 
