@@ -2,7 +2,7 @@
 #include <string>
 #include "Board.h"
 #define LOWER_LET_TO_NUM 97
-
+#define PIECE_IN_WAY_EXPN 9
 class Board;
 
 class Piece

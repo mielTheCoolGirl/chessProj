@@ -16,8 +16,8 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 	int dx = (numDst[0] > numSrc[0]) ? 1 : (numDst[0] < numSrc[0]) ? -1 : 0;
 	int dy = (numDst[1] > numSrc[1]) ? 1 : (numDst[1] < numSrc[1]) ? -1 : 0;
 
-	int x = numSrc[0] + dx;
-	int y = numSrc[1] + dy;
+	int x = int(numSrc[0]) + dx;
+	int y = int(numSrc[1]) + dy;
 
 	while (x != dstCoords[1] || y != dstCoords[0])
 	{
