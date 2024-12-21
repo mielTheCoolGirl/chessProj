@@ -27,7 +27,7 @@ void GameManager::mainGame()
 	b.printBoard();
 }
 
-bool GameManager::turnExpn(const std::string& coords, const Board& board)
+bool GameManager::turnExpn(const std::string& coords, const Board& b)
 {
 	std::string src = "";
 	std::string dst = "";
@@ -44,13 +44,21 @@ bool GameManager::turnExpn(const std::string& coords, const Board& board)
 	{
 		throw int(5);
 	}
-	else if (board.board[src[0]][src[1]]->getColor() != this->_currentPlayer)
+	else if (src == dst)
 	{
-		throw int(2);
+		throw (7); //dst and src are the same
 	}
-	else if (board.board[dst[0]][dst[1]]->getColor() == this->_currentPlayer)
+	else if (b.board[src[0]][src[1]]->getColor() != this->_currentPlayer)
 	{
-		throw int(3);
+		throw int(2); //no player's piece in tile
+	}
+	else if (b.board[dst[0]][dst[1]]->getColor() == this->_currentPlayer)
+	{
+		throw int(3); //same color piece in dst
+	}
+	else if (b.board[src[0]][src[1]]->legalMovement(dst) == false)
+	{
+		throw int(6); //not legal move of piece
 	}
 
 
