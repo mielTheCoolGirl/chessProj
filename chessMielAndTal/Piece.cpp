@@ -10,7 +10,7 @@ Piece::~Piece()
 }
 
 
-std::string Piece::lettersToCoords(std::string coords)
+std::string Piece::lettersToCoords(std::string coords) //a2 [6][0]
 {
     int letterToNum = coords[0] - LOWER_LET_TO_NUM;
     int yAxis = BOARD_LEN - (coords[1] - ASC_NUM_TO_NUM);

@@ -30,7 +30,7 @@ Board::Board() : _isChecking(0)
 		resCoord += "2";
 		board[6][i] = new Rook('r', resCoord, BLACK);
 	}
-	
+
 	board[7][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
 
 
