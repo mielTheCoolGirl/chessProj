@@ -23,7 +23,7 @@ void GameManager::mainGame()
 {
 	Board b;
 	b.printBoard();
-	b.board[7][0]->move(b,"g0");
+	b.board[7][0]->move(b,"b1");
 	b.printBoard();
 }
 

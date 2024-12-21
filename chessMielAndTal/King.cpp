@@ -11,8 +11,8 @@ King::~King()
 void King::eat(Board& board, const std::string& endCoords)
 {
 	std::string newCoords = lettersToCoords(_currentCoords);
-	board.board[endCoords[0] - '0'][endCoords[1] - '0'] = board.board[BOARD_LEN - (newCoords[1] - '0')][newCoords[0] - '0'];
-	board.board[BOARD_LEN - (newCoords[1] - '0')][newCoords[0] - '0'] = nullptr;
+	board.board[endCoords[0] - '0'][endCoords[1] - '0'] = board.board[newCoords[0] - '0'][newCoords[1] - '0'];
+	board.board[newCoords[0] - '0'][newCoords[1] - '0'] = nullptr;
 }
 
 void King::move(Board& board, std::string dstCoords)
@@ -21,7 +21,7 @@ void King::move(Board& board, std::string dstCoords)
 	std::string coordsCalc = lettersToCoords(dstCoords);
 	std::string firstCoords = lettersToCoords(_currentCoords);
 	y1 = firstCoords[0] - '0';
-	x1 = BOARD_LEN-(firstCoords[1] - '0');
+	x1 = firstCoords[1] - '0';
 	y2 = coordsCalc[0] - '0';
 	x2 = coordsCalc[1] - '0';
 
@@ -29,7 +29,7 @@ void King::move(Board& board, std::string dstCoords)
 	{
 		if (board.board[y2][x2]->getColor() != this->getColor())
 		{
-			eat(board,coordsCalc);
+			eat(board, coordsCalc);
 		}
 		else
 		{
@@ -64,4 +64,3 @@ bool King::legalMovement(const std::string& dstCoords) const
 	}
 	return false;
 }
-
