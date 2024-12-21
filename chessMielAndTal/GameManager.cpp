@@ -48,11 +48,11 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 	{
 		throw (7); //dst and src are the same
 	}
-	else if (b.board[src[0]][src[1]]->getColor() != this->_currentPlayer)
+	else if (b.board[src[0]][src[1]] == nullptr || b.board[src[0]][src[1]]->getColor() != this->_currentPlayer)
 	{
 		throw int(2); //no player's piece in tile
 	}
-	else if (b.board[dst[0]][dst[1]]->getColor() == this->_currentPlayer)
+	else if (b.board[src[0]][src[1]] != nullptr && b.board[dst[0]][dst[1]]->getColor() == this->_currentPlayer)
 	{
 		throw int(3); //same color piece in dst
 	}
