@@ -13,7 +13,7 @@ Board::Board() : _isChecking(0)
 			board[i][j] = nullptr;
 	}
 	//putting all the pawns in place
-	for (int i = 0; i < BOARD_LEN; i++)
+	/*for (int i = 0; i < BOARD_LEN; i++)
 	{
 		char res = char(i + A_VALUE);
 		std::string coordsStr = "2";
@@ -27,7 +27,8 @@ Board::Board() : _isChecking(0)
 		std::string coordsStr = "6";
 		coordsStr += res;
 		board[6][i] = new Rook('r', coordsStr, BLACK);
-	}
+	}*/
+	board[6][0] = new Rook('r', "a2", BLACK);
 	board[7][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
 
 

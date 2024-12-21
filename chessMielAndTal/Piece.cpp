@@ -32,9 +32,9 @@ void Piece::setType(const char& newType)
     this->_type = newType;
 }
 
-void Piece::setCurrentCoords(const std::string& newCoords)
+void Piece::setCurrentCoords(const std::string newCoords)
 {
-    this->_currentCoords = newCoords;
+    _currentCoords = newCoords;
 }
 
 bool Piece::getColor() const

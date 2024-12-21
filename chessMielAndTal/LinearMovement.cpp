@@ -13,8 +13,8 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 	std::string numSrc = lettersToCoords(this->_currentCoords);
 	std::string numDst = lettersToCoords(dstCoords);
 
-	int srcX = int(numSrc[0]); int srcY = int(numSrc[1]);
-	int dstX = int(numDst[0]); int dstY = int(numDst[1]);
+	int srcX = int(numSrc[1] - ASC_NUM_TO_NUM); int srcY = int(numSrc[0] - ASC_NUM_TO_NUM);
+	int dstX = int(numDst[1] - ASC_NUM_TO_NUM); int dstY = int(numDst[0] - ASC_NUM_TO_NUM);
 	//change of X and Y per tile 
 	int dx = (dstX > srcX) ? 1 : (dstX < srcX) ? -1 : 0;
 	int dy = (dstY > srcY) ? 1 : (dstY < srcY) ? -1 : 0;
@@ -31,9 +31,13 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 	}
 
 	//move the piece
+	if (b.board[srcY][srcX] == nullptr)
+	{
+		std::cout << "kaki" << std::endl;
+	}
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
-
+	
 	b.board[dstY][dstX]->setCurrentCoords(dstCoords); //new coords of piece
 	
 }

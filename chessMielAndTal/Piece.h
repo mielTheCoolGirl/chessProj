@@ -2,6 +2,7 @@
 #include <string>
 #include "Board.h"
 #define LOWER_LET_TO_NUM 97
+#define ASC_NUM_TO_NUM '0'
 #define PIECE_IN_WAY_EXPN 9
 class Board;
 
@@ -30,7 +31,7 @@ public:
 
 	void setType(const char& newType);
 
-	void setCurrentCoords(const std::string& newCoords);
+	void setCurrentCoords(const std::string newCoords);
 
 	bool getColor()const;
 	void setColor(const bool& color);
