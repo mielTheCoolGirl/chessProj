@@ -15,7 +15,7 @@ Board::Board() : _isChecking(0)
 			board[i][j] = nullptr;
 	}
 	//putting all the rooks in place(for checking, in the main game it will be pawns)
-	for (int i = 0; i < BOARD_LEN; i++)
+	/*for (int i = 0; i < BOARD_LEN; i++)
 	{
 		std::string resCoord = "";
 		char res = char(i + A_VALUE);
@@ -30,11 +30,11 @@ Board::Board() : _isChecking(0)
 		char res = char(i + A_VALUE);
 		resCoord += res;
 		resCoord += "2";
-		board[6][i] = new Rook('p', resCoord, BLACK);
-	}
+		board[6][i] = new Rook('r', resCoord, BLACK);
+	}*/
 
-	board[5][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
-
+	board[5][0] = new King('K', "a3", WHITE);//setting up a king to see if he eats
+	board[7][1] = new Rook('n', "c3", BLACK);//setting up a king to see if he eats
 
 }
 
@@ -75,7 +75,7 @@ bool Board::checkDanger(Piece* king)
 	std::string kingCoords = Piece::lettersToCoords(king->getCurrentCoords());
 	int kingX = kingCoords[1] - '0';
 	int kingY = kingCoords[0] - '0';
-	if (pawnCheck(king, kingX, kingY) || checkHorizonAndVert(king, kingX, kingY)|| knightCheck(king,kingX,kingY))
+	if (knightCheck(king,kingX,kingY))
 		return true;
 	return false;
 
@@ -88,41 +88,41 @@ bool Board::isInBounds(int x, int y)
 
 bool Board::checkHorizonAndVert(Piece* king, int kingX, int kingY)
 {
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		if (board[i][kingX] != nullptr)
-		{
-			if (board[i][kingX]->getColor() != king->getColor() &&
-				tolower(board[i][kingX]->getType()) == 'r' || tolower(board[i][kingX]->getType()) == 'q')
-			{
-				//changing the check status into 1 if white checks black and 2 if black checks white
-				if (board[i][kingX]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
-				return true;
-			}
+	//for (int i = 0; i < BOARD_LEN; i++)
+	//{
+	//	if (board[i][kingX] != nullptr)
+	//	{
+	//		if (board[i][kingX]->getColor() != king->getColor() &&
+	//			tolower(board[i][kingX]->getType()) == 'r' || tolower(board[i][kingX]->getType()) == 'q')
+	//		{
+	//			//changing the check status into 1 if white checks black and 2 if black checks white
+	//			if (board[i][kingX]->getColor())
+	//			{
+	//				_isChecking = WHITE_CHECKS;
+	//			}
+	//			else
+	//			{
+	//				_isChecking = BLACK_CHECKS;
+	//			}
+	//			return true;
+	//		}
 
-			if (board[kingY][i]->getColor() != king->getColor() &&
-				(tolower(board[kingY][i]->getType()) == 'r' || tolower(board[kingY][i]->getType()) == 'q'))
-			{
-				//changing the check status into 1 if white checks black and 2 if black checks white
-				if (board[kingY][i]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
-				return true;
-			}
-		}
-	}
+	//		if (board[kingY][i]->getColor() != king->getColor() &&
+	//			(tolower(board[kingY][i]->getType()) == 'r' || tolower(board[kingY][i]->getType()) == 'q'))
+	//		{
+	//			//changing the check status into 1 if white checks black and 2 if black checks white
+	//			if (board[kingY][i]->getColor())
+	//			{
+	//				_isChecking = WHITE_CHECKS;
+	//			}
+	//			else
+	//			{
+	//				_isChecking = BLACK_CHECKS;
+	//			}
+	//			return true;
+	//		}
+	//	}
+	//}
 	
 	return false;
 }
@@ -238,35 +238,21 @@ bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 
 bool Board::knightCheck(Piece* king, int kingX, int kingY)
 {
-	
-	if (kingY + 1 < BOARD_LEN)
+	//storing all movemnts of x and y across the board
+	int amountOfMovs = 8;
+	int posX, posY;
+	int knightMoveOptions[8][2] = { {-1,-2},{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2}};
+	for (int i = 0; i < amountOfMovs; i++)
 	{
-		if (kingX - 2 >= 0)
+		posX = knightMoveOptions[i][0] + kingX;
+		posY = knightMoveOptions[i][1] + kingY;
+		if (posX < BOARD_LEN && posX >= 0 && posY < BOARD_LEN && posY >= 0)
 		{
-			if (kingX - 2 >= 0)
+			if (board[posY][posX] != nullptr)
 			{
-				if (board[kingY + 1][kingX - 2] != nullptr)
+				if (board[posY][posX]->getColor() != king->getColor() && tolower(board[posY][posX]->getType()) == 'n')
 				{
-					if (board[kingY + 1][kingX - 2]->getColor() != king->getColor() && tolower(board[kingY + 1][kingX - 2]->getType()) == 'n')
-					{
-						if (board[kingY + 1][kingX - 2]->getColor())
-						{
-							_isChecking = 1;
-						}
-						else
-						{
-							_isChecking = 2;
-						}
-						return true;
-					}
-				}
-				
-			}
-			if (board[kingY + 2][kingX - 1] != nullptr)
-			{
-				if (board[kingY + 2][kingX - 1]->getColor() != king->getColor() && tolower(board[kingY + 2][kingX - 1]->getType()) == 'n')
-				{
-					if (board[kingY + 2][kingX - 1]->getColor())
+					if (board[posY][posX]->getColor())
 					{
 						_isChecking = 1;
 					}
@@ -277,135 +263,9 @@ bool Board::knightCheck(Piece* king, int kingX, int kingY)
 					return true;
 				}
 			}
-
 		}
-		
-		if (kingX+1<BOARD_LEN)
-		{
-			if (board[kingY + 2][kingX + 1] != nullptr)
-			{
-				if (board[kingY + 2][kingX + 1]->getColor() != king->getColor() && tolower(board[kingY + 2][kingX + 1]->getType()) == 'n')
-				{
-					if (board[kingY + 2][kingX + 1]->getColor())
-					{
-						_isChecking = 1;
-					}
-					else
-					{
-						_isChecking = 2;
-					}
-					return true;
-				}
-			}
-			
-			if (kingX + 2 < BOARD_LEN)
-			{
-				if (board[kingY + 1][kingX + 2] != nullptr)
-				{
-					if (board[kingY + 1][kingX + 2]->getColor() != king->getColor() && tolower(board[kingY + 1][kingX + 2]->getType()) == 'n')
-					{
-						if (board[kingY + 1][kingX + 2]->getColor())
-						{
-							_isChecking = 1;
-						}
-						else
-						{
-							_isChecking = 2;
-						}
-						return true;
-					}
-				}
-				
-			}
-		}
-
 	}
 	
-	if (kingY - 1 >= 0)
-	{
-	
-		if (kingX - 1 >= 0)
-		{
-			if (board[kingY - 2][kingX - 1] != nullptr)
-			{
-				if (board[kingY - 2][kingX - 1]->getColor() != king->getColor() && tolower(board[kingY - 2][kingX - 1]->getType()) == 'n')
-				{
-					if (board[kingY - 2][kingX - 1]->getColor())
-					{
-						_isChecking = 1;
-					}
-					else
-					{
-						_isChecking = 2;
-					}
-					return true;
-				}
-				if (kingX - 2 >= 0)
-				{
-					if (board[kingY - 1][kingX - 2] != nullptr)
-					{
-						if (board[kingY - 1][kingX - 2]->getColor() != king->getColor() && tolower(board[kingY - 1][kingX - 2]->getType()) == 'n')
-						{
-							if (board[kingY - 1][kingX - 2]->getColor())
-							{
-								_isChecking = 1;
-							}
-							else
-							{
-								_isChecking = 2;
-							}
-							return true;
-						}
-					}
-				}
-
-			}
-			
-		}
-		
-		
-
-		if (kingX + 1 < BOARD_LEN)
-		{
-			if (board[kingY - 2][kingX + 1] != nullptr)
-			{
-				if (board[kingY - 2][kingX + 1]->getColor() != king->getColor() && tolower(board[kingY - 2][kingX + 1]->getType()) == 'n')
-				{
-					if (board[kingY - 2][kingX + 1]->getColor())
-					{
-						_isChecking = 1;
-					}
-					else
-					{
-						_isChecking = 2;
-					}
-					return true;
-				}
-			}
-			
-			if (kingX + 2 < BOARD_LEN)
-			{
-				if (board[kingY - 1][kingX + 2] != nullptr)
-				{
-					if (board[kingY - 1][kingX + 2]->getColor() != king->getColor() && tolower(board[kingY - 1][kingX + 2]->getType()) == 'n')
-					{
-						if (board[kingY - 1][kingX + 2]->getColor())
-						{
-							_isChecking = 1;
-						}
-						else
-						{
-							_isChecking = 2;
-						}
-						return true;
-					}
-				}
-				
-			}
-
-		}
-		
-	}
 
 	return false;
 }
