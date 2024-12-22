@@ -23,7 +23,6 @@ void GameManager::mainGame()
 {
 	std::string a = "";
 	Board b;
-	a = Piece::lettersToCoords("a1");
 	b.printBoard();
 	/*try
 	{
@@ -36,7 +35,7 @@ void GameManager::mainGame()
 			std::cout << "src and dst are the same" << std::endl;
 		}
 	}*/
-	b.board[6][0]->move(b,"a1");
+	std::cout << b.checkDanger(b.board[7][0]) << std::endl;
 	b.printBoard();
 }
 

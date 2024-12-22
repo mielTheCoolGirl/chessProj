@@ -11,7 +11,7 @@ class Piece
 protected:
 	char _type;
 	std::string _currentCoords;
-	bool _color;
+	bool _color; //true is white, false is black
 public:
 	Piece(const char& type, const std::string& currentCoords, const bool& color);
 	virtual ~Piece();
