@@ -38,7 +38,7 @@ void GameManager::mainGame()
 		}
 		
 	}*/
-	std::cout << b.checkDanger(b.board[5][3]) << std::endl;
+	std::cout << b.checkDanger(b.board[5][2]) << std::endl;
 	b.printBoard();
 }
 
