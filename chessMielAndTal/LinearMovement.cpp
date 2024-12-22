@@ -30,11 +30,7 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 		y += dy;
 	}
 
-	//move the piece
-	if (b.board[srcY][srcX] == nullptr)
-	{
-		std::cout << "kaki" << std::endl;
-	}
+	
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
 	
