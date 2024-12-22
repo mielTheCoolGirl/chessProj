@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "Rook.h"
+#include "Bishop.h"
 #include "King.h"
 #define A_VALUE 97
 #define WHITE 1
@@ -24,28 +25,18 @@ Board::Board() : _isChecking(0)
 		board[1][i] = new Rook('R', resCoord, WHITE);
 
 	}
-	/*for (int i = 0; i < BOARD_LEN; i++)
+	for (int i = 0; i < BOARD_LEN; i++)
 	{
 		std::string resCoord = "";
 		char res = char(i + A_VALUE);
 		resCoord += res;
 		resCoord += "2";
-		board[6][i] = new Rook('p', resCoord, BLACK);
-	}*/
-
-	board[7][0] = new Rook('b', "a1", BLACK);//setting up a king 
-	board[6][1] = new Rook('B', "b2", WHITE);//setting up a king 
-	board[5][2] = new King('K', "c3", WHITE);//setting up a king 
-	/* 
-	* for testing!
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		for (int j = 0;j < BOARD_LEN; j++)
-		{
-			board[i][j] = nullptr;
-		}
+		board[6][i] = new Rook('r', resCoord, BLACK);
 	}
-	*/
+	//setting them up just for testing
+	/*board[7][0] = new Bishop('b', "a1", BLACK);
+	board[6][1] = new Bishop('B', "b2", WHITE);*/
+	board[5][2] = new King('K', "c3", WHITE);//setting up a king 
 	
 
 
@@ -188,7 +179,7 @@ bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 {					
 	if (king->getColor() == WHITE)
 	{
-		if ((isInBounds(kingX - 1, kingY - 1) && board[kingY - 1][kingX - 1] != nullptr && board[kingY - 1][kingX - 1]->getType() == 'p') || 
+		if ((isInBounds(kingX + 1, kingY + 1) && board[kingY + 1][kingX + 1] != nullptr && board[kingY + 1][kingX + 1]->getType() == 'p') ||
 			(isInBounds(kingX + 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'p'))
 		{
 			_isChecking = BLACK_CHECKS;
