@@ -23,20 +23,22 @@ void GameManager::mainGame()
 {
 	std::string a = "";
 	Board b;
+
 	b.printBoard();
-	try
+	/*try
 	{
 		turnExpn("a1g1", b);
 	}
+	
 	catch (int e)
 	{
 		if (e == 7)
 		{
 			std::cout << "src and dst are the same" << std::endl;
 		}
-		exit(5435345);
-	}
-	std::cout << b.checkDanger(b.board[5][0]) << std::endl;
+		
+	}*/
+	std::cout << b.checkDanger(b.board[5][3]) << std::endl;
 	b.printBoard();
 }
 

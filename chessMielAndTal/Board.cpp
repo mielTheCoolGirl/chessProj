@@ -9,31 +9,41 @@
 Board::Board() : _isChecking(0)
 {
 
+	//for (int i = 0; i < BOARD_LEN; i++)
+	//{
+	//	for (int j = 0; j < BOARD_LEN; j++)
+	//		board[i][j] = nullptr;
+	//}
+	////putting all the rooks in place(for checking, in the main game it will be pawns)
+	//for (int i = 0; i < BOARD_LEN; i++)
+	//{
+	//	std::string resCoord = "";
+	//	char res = char(i + A_VALUE);
+	//	resCoord += res;
+	//	resCoord += "7";
+	//	board[1][i] = new Rook('R', resCoord, WHITE);
+
+	//}
+	//for (int i = 0; i < BOARD_LEN; i++)
+	//{
+	//	std::string resCoord = "";
+	//	char res = char(i + A_VALUE);
+	//	resCoord += res;
+	//	resCoord += "2";
+	//	board[6][i] = new Rook('p', resCoord, BLACK);
+	//}
+
+	//board[5][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
-		for (int j = 0; j < BOARD_LEN; j++)
+		for (int j = 0;j < BOARD_LEN; j++)
+		{
 			board[i][j] = nullptr;
+		}
 	}
-	//putting all the rooks in place(for checking, in the main game it will be pawns)
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		std::string resCoord = "";
-		char res = char(i + A_VALUE);
-		resCoord += res;
-		resCoord += "7";
-		board[1][i] = new Rook('R', resCoord, WHITE);
-
-	}
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		std::string resCoord = "";
-		char res = char(i + A_VALUE);
-		resCoord += res;
-		resCoord += "2";
-		board[6][i] = new Rook('p', resCoord, BLACK);
-	}
-
-	board[5][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
+	board[0][3] = new Rook('r', "d8", BLACK);
+	board[2][3] = new Rook('R', "d6", WHITE);
+	board[5][3] = new King('K', "d3", WHITE);
 
 
 }
@@ -88,38 +98,69 @@ bool Board::isInBounds(int x, int y)
 
 bool Board::checkHorizonAndVert(Piece* king, int kingX, int kingY)
 {
-	for (int i = 0; i < BOARD_LEN; i++)
+	bool kingColor = king->getColor();
+	bool potCheck = true; //Potiential check
+	Piece* p = nullptr;
+	for (int y = kingY + 1; y < BOARD_LEN && potCheck == true; y++) //check below to king
 	{
-		if (board[i][kingX] != nullptr)
+		p = board[y][kingX];
+		if (p != nullptr)
 		{
-			if (board[i][kingX]->getColor() != king->getColor() &&
-				tolower(board[i][kingX]->getType()) == 'r' || tolower(board[i][kingX]->getType()) == 'q')
+			if (kingColor != p->getColor() && (tolower(p->getType()) == 'q' || tolower(p->getType()) == 'r'))
 			{
-				//changing the check status into 1 if white checks black and 2 if black checks white
-				if (board[i][kingX]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
 				return true;
 			}
-
-			if (board[kingY][i]->getColor() != king->getColor() &&
-				(tolower(board[kingY][i]->getType()) == 'r' || tolower(board[kingY][i]->getType()) == 'q'))
+			else 
 			{
-				//changing the check status into 1 if white checks black and 2 if black checks white
-				if (board[kingY][i]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
+				potCheck = false;
+			}
+		}
+	}
+	potCheck = true;
+	for (int y = kingY - 1; y >= 0 && potCheck == true; y--) //check above the king
+	{
+		p = board[y][kingX];
+		if (p != nullptr)
+		{
+			if (kingColor != p->getColor() && (tolower(p->getType()) == 'q' || tolower(p->getType()) == 'r'))
+			{
 				return true;
+			}
+			else
+			{
+				potCheck = false;
+			}
+		}
+	}
+	potCheck = true;
+	for (int x = kingX + 1; x < BOARD_LEN && potCheck == true; x++) //check right to the king
+	{
+		p = board[kingY][x];
+		if (p != nullptr)
+		{
+			if (kingColor != p->getColor() && (tolower(p->getType()) == 'q' || tolower(p->getType()) == 'r'))
+			{
+				return true;
+			}
+			else
+			{
+				potCheck = false;
+			}
+		}
+	}
+	potCheck = true;
+	for (int x = kingX - 1; x >= 0 && potCheck == true; x--) //check left to the king
+	{
+		p = board[kingY][x];
+		if (p != nullptr)
+		{
+			if (kingColor != p->getColor() && (tolower(p->getType()) == 'q' || tolower(p->getType()) == 'r'))
+			{
+				return true;
+			}
+			else
+			{
+				potCheck = false;
 			}
 		}
 	}
@@ -238,8 +279,8 @@ bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 
 bool Board::knightCheck(Piece* king, int kingX, int kingY)
 {
-	
-	if (kingY + 1 < BOARD_LEN)
+	return false;
+	/*if (kingY + 1 < BOARD_LEN)
 	{
 		if (kingX - 2 >= 0)
 		{
@@ -407,7 +448,7 @@ bool Board::knightCheck(Piece* king, int kingX, int kingY)
 		
 	}
 
-	return false;
+	return false;*/
 }
 
 bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
