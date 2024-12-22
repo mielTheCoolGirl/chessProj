@@ -24,9 +24,9 @@ void GameManager::mainGame()
 	std::string a = "";
 	Board b;
 	b.printBoard();
-	/*try
+	try
 	{
-		turnExpn("a1b1", b);
+		turnExpn("a1g1", b);
 	}
 	catch (int e)
 	{
@@ -34,7 +34,8 @@ void GameManager::mainGame()
 		{
 			std::cout << "src and dst are the same" << std::endl;
 		}
-	}*/
+		exit(5435345);
+	}
 	std::cout << b.checkDanger(b.board[5][0]) << std::endl;
 	b.printBoard();
 }
@@ -54,10 +55,9 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 	int dstX = int(numDst[0] - ASC_NUM_TO_NUM); int dstY = int(numDst[1] - ASC_NUM_TO_NUM);
 
 	// format: srcCoords + dstCoords (each coord is 2 chars letter and number)
-	if (srcX < 0 || srcX > 7 || dstX < 0 || dstX > 0 || //letter checking
-		srcY < 0 || srcY > 7 || dstY < 0 || dstY > 0) //number cheking
+	if (Board::isInBounds(srcX, srcY) == false || Board::isInBounds(dstX, dstY) == false)
 	{
-		throw int(5);
+		throw int(5); //src or dst are not in bounds
 	}
 	else if (numSrc == numDst)
 	{

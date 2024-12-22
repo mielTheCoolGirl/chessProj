@@ -81,6 +81,11 @@ bool Board::checkDanger(Piece* king)
 
 }
 
+bool Board::isInBounds(int x, int y)
+{
+	return !(x > BOARD_LEN - 1 || x < 0 || y > BOARD_LEN - 1 || y < 0);
+}
+
 bool Board::checkHorizonAndVert(Piece* king, int kingX, int kingY)
 {
 	for (int i = 0; i < BOARD_LEN; i++)
@@ -484,7 +489,4 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 	return false;
 }
 
-bool Board::isInBounds(int x, int y)
-{
-	return !(x > BOARD_LEN - 1 || x < 0 || y > BOARD_LEN - 1 || y < 0);
-}
+

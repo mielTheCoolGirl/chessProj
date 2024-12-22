@@ -14,7 +14,7 @@ private:
 	bool pawnCheck(Piece* king, int kingX, int kingY);
 	bool knightCheck(Piece* king, int kingX, int kingY);
 	bool diagonalCheck(Piece* king, int kingX, int kingY);
-	bool isInBounds(int x, int y);
+	
 public:
 	Piece* board[BOARD_LEN][BOARD_LEN];
 	Board();
@@ -23,6 +23,9 @@ public:
 	//getter and setter
 	int getIsChecking()const;
 	void setIsChecking(int state);
+	static bool isInBounds(int x, int y);
 	//checks danger for a king, returns true or false(checks for current king peice)
 	bool checkDanger(Piece* king);
+
+	
 };
