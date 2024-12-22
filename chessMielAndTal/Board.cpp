@@ -73,14 +73,13 @@ bool Board::checkDanger(Piece* king)
 	std::string kingCoords = Piece::lettersToCoords(king->getCurrentCoords());
 	int kingX = kingCoords[1] - '0';
 	int kingY = kingCoords[0] - '0';
-	
-	
-	
+	if (pawnCheck(king, kingX, kingY) || checkHorizonAndVert(king, kingX, kingY))
+		return true;
 	return false;
-	
+
 }
 
-bool Board::checkHorizonAndVert(Piece* king, int kingX,int kingY)
+bool Board::checkHorizonAndVert(Piece* king, int kingX, int kingY)
 {
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
@@ -125,38 +124,91 @@ bool Board::checkHorizonAndVert(Piece* king, int kingX,int kingY)
 
 bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 {
-	//check either piece is black (since blacks begin from the bottom and move up)
-	if (board[kingY - 1][kingX + 1] != nullptr || board[kingY + 1][kingX - 1] != nullptr)
+	//if the king's white we check for black pawn movement(since black peices move from downwards up in the board)
+	if (king->getColor())
 	{
-		if (!(board[kingY - 1][kingX + 1]->getColor() || board[kingY + 1][kingX - 1]->getColor()))
+		if (kingY + 1 < BOARD_LEN)
 		{
-			if (board[kingY - 1][kingX + 1]->getColor() != king->getColor() && tolower(board[kingY - 1][kingX + 1]->getType()) == 'b' || tolower(board[kingY - 1][kingX + 1]->getType()) == 'q' || tolower(board[kingY - 1][kingX + 1]->getType()) == 'p')
+			if (board[kingY + 1][kingX + 1] != nullptr)
 			{
-				if (board[kingY - 1][kingX + 1]->getColor())
+				if (board[kingY + 1][kingX + 1]->getColor() != king->getColor() && tolower(board[kingY + 1][kingX + 1]->getType()) == 'b' || tolower(board[kingY + 1][kingX + 1]->getType()) == 'q' || tolower(board[kingY + 1][kingX + 1]->getType()) == 'p')
 				{
-					_isChecking = 1;
+					if (board[kingY + 1][kingX + 1]->getColor())
+					{
+						_isChecking = 1;
+					}
+					else
+					{
+						_isChecking = 2;
+					}
+					return true;
 				}
-				else
-				{
-					_isChecking = 2;
-				}
-				return true;
 			}
 		}
-		if (board[kingY + 1][kingX - 1]->getColor() != king->getColor() && tolower(board[kingY + 1][kingX - 1]->getType()) == 'b' || tolower(board[kingY + 1][kingX - 1]->getType()) == 'q' || tolower(board[kingY + 1][kingX - 1]->getType()) == 'p')
+		if (kingX - 1 >= 0)
 		{
-			if (board[kingY + 1][kingX - 1]->getColor())
+			if (board[kingY + 1][kingX - 1] != nullptr)
 			{
-				_isChecking = 1;
+				if (board[kingY + 1][kingX - 1]->getColor() != king->getColor() && tolower(board[kingY + 1][kingX - 1]->getType()) == 'b' || tolower(board[kingY + 1][kingX - 1]->getType()) == 'q' || tolower(board[kingY + 1][kingX - 1]->getType()) == 'p')
+				{
+					if (board[kingY + 1][kingX - 1]->getColor())
+					{
+						_isChecking = 1;
+					}
+					else
+					{
+						_isChecking = 2;
+					}
+					return true;
+				}
+
 			}
-			else
-			{
-				_isChecking = 2;
-			}
-			return true;
 		}
+		
+				
 	}
 	
-	
+	//white pawns eat diffrently
+	else
+	{
+		if (kingY - 1 >= 0)
+		{
+			if (board[kingY - 1][kingX - 1] != nullptr)
+			{
+				if (board[kingY - 1][kingX - 1]->getColor() != king->getColor() && tolower(board[kingY - 1][kingX - 1]->getType()) == 'b' || tolower(board[kingY - 1][kingX - 1]->getType()) == 'q' || tolower(board[kingY - 1][kingX - 1]->getType()) == 'p')
+				{
+					if (board[kingY - 1][kingX - 1]->getColor())
+					{
+						_isChecking = 1;
+					}
+					else
+					{
+						_isChecking = 2;
+					}
+					return true;
+				}
+			}
+		}
+		if (kingX + 1 < BOARD_LEN)
+		{
+			if (board[kingY - 1][kingX + 1] != nullptr)
+			{
+				if (board[kingY - 1][kingX + 1]->getColor() != king->getColor() && tolower(board[kingY - 1][kingX + 1]->getType()) == 'b' || tolower(board[kingY - 1][kingX + 1]->getType()) == 'q' || tolower(board[kingY - 1][kingX + 1]->getType()) == 'p')
+				{
+					if (board[kingY - 1][kingX + 1]->getColor())
+					{
+						_isChecking = 1;
+					}
+					else
+					{
+						_isChecking = 2;
+					}
+					return true;
+				}
+			}
+		}
+		
+	}
+	return false;
 	
 }
