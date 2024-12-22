@@ -14,7 +14,7 @@ private:
 	bool pawnCheck(Piece* king, int kingX, int kingY);
 	bool knightCheck(Piece* king, int kingX, int kingY);
 	bool diagonalCheck(Piece* king, int kingX, int kingY);
-
+	bool isInBounds(int x, int y);
 public:
 	Piece* board[BOARD_LEN][BOARD_LEN];
 	Board();

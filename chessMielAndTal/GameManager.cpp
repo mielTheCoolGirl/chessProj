@@ -35,7 +35,7 @@ void GameManager::mainGame()
 			std::cout << "src and dst are the same" << std::endl;
 		}
 	}*/
-	std::cout << b.checkDanger(b.board[7][0]) << std::endl;
+	std::cout << b.checkDanger(b.board[5][0]) << std::endl;
 	b.printBoard();
 }
 

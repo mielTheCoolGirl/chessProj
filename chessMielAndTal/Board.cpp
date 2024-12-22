@@ -5,6 +5,7 @@
 #define WHITE 1
 #define BLACK 0
 #define BLACK_CHECKS 2 
+#define WHITE_CHECKS 1
 Board::Board() : _isChecking(0)
 {
 
@@ -29,10 +30,10 @@ Board::Board() : _isChecking(0)
 		char res = char(i + A_VALUE);
 		resCoord += res;
 		resCoord += "2";
-		board[6][i] = new Rook('n', resCoord, BLACK);
+		board[6][i] = new Rook('p', resCoord, BLACK);
 	}
 
-	board[7][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
+	board[5][0] = new King('K', "a1", WHITE);//setting up a king to see if he eats
 
 
 }
@@ -84,42 +85,40 @@ bool Board::checkHorizonAndVert(Piece* king, int kingX, int kingY)
 {
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
-		if (board[i][kingX] != nullptr &&
-			board[i][kingX]->getColor() != king->getColor() && 
-			tolower(board[i][kingX]->getType()) == 'r' || 
-			tolower(board[i][kingX]->getType()) == 'q')
+		if (board[i][kingX] != nullptr)
 		{
-			//changing the check status into 1 if white checks black and 2 if black checks white
-			if (board[i][kingX]->getColor())
+			if (board[i][kingX]->getColor() != king->getColor() &&
+				tolower(board[i][kingX]->getType()) == 'r' || tolower(board[i][kingX]->getType()) == 'q')
 			{
-				_isChecking = WHITE;
+				//changing the check status into 1 if white checks black and 2 if black checks white
+				if (board[i][kingX]->getColor())
+				{
+					_isChecking = WHITE_CHECKS;
+				}
+				else
+				{
+					_isChecking = BLACK_CHECKS;
+				}
+				return true;
 			}
-			else
-			{
-				_isChecking = BLACK_CHECKS;
-			}
-			return true;
-		}
-	}
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		if (board[kingY][i] != nullptr)
-		{
-			if (board[kingY][i]->getColor() != king->getColor() && tolower(board[kingY][i]->getType()) == 'r' || tolower(board[kingY][i]->getType()) == 'q')
+
+			if (board[kingY][i]->getColor() != king->getColor() &&
+				(tolower(board[kingY][i]->getType()) == 'r' || tolower(board[kingY][i]->getType()) == 'q'))
 			{
 				//changing the check status into 1 if white checks black and 2 if black checks white
 				if (board[kingY][i]->getColor())
 				{
-					_isChecking = WHITE;
+					_isChecking = WHITE_CHECKS;
 				}
 				else
 				{
-					_isChecking = BLACK;
+					_isChecking = BLACK_CHECKS;
 				}
 				return true;
 			}
 		}
 	}
+	
 	return false;
 }
 
@@ -127,7 +126,8 @@ bool Board::checkHorizonAndVert(Piece* king, int kingX, int kingY)
 bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 {
 	//if the king's white we check for black pawn movement(since black peices move from downwards up in the board)
-	if (king->getColor())
+	
+	/*if (king->getColor())
 	{
 		if (kingY + 1 < BOARD_LEN)
 		{
@@ -164,14 +164,30 @@ bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 					return true;
 				}
 
-			}
-		}
+			*/
+		
 		
 				
+	if (king->getColor() == WHITE)
+	{
+		if ((isInBounds(kingX - 1, kingY - 1) && board[kingY - 1][kingX - 1] != nullptr && board[kingY - 1][kingX - 1]->getType() == 'p') || 
+			(isInBounds(kingX + 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'p'))
+		{
+			_isChecking = BLACK_CHECKS;
+			return true;
+		}
 	}
-	
+	else //black color
+	{
+		if ((isInBounds(kingX - 1, kingY - 1) && board[kingY - 1][kingX - 1] != nullptr && board[kingY - 1][kingX - 1]->getType() == 'P') ||
+			(isInBounds(kingX + 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'P'))
+		{
+			_isChecking = WHITE_CHECKS;
+			return true;
+		}
+	}
 	//white pawns eat from up to down digaonlly
-	else
+	/*else
 	{
 		if (kingY - 1 >= 0)
 		{
@@ -210,7 +226,7 @@ bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 			}
 		}
 		
-	}
+	}*/
 	return false;
 	
 }
@@ -466,4 +482,9 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		}
 	}
 	return false;
+}
+
+bool Board::isInBounds(int x, int y)
+{
+	return !(x > BOARD_LEN - 1 || x < 0 || y > BOARD_LEN - 1 || y < 0);
 }
