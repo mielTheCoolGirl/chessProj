@@ -12,6 +12,7 @@ private:
 	//function checks the rook/queen department
 	bool checkHorizonAndVert(Piece* king, int kingX, int kingY);
 	bool pawnCheck(Piece* king, int kingX, int kingY);
+	bool KnightCheck(Piece* king, int kingX, int kingY);
 
 public:
 	Piece* board[BOARD_LEN][BOARD_LEN];
