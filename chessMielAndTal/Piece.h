@@ -35,4 +35,6 @@ public:
 
 	bool getColor()const;
 	void setColor(const bool& color);
+
+	Piece& operator=(const Piece& other);
 };

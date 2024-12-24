@@ -48,3 +48,17 @@ void Piece::setColor(const bool& color)
     _color = color;
 }
 
+Piece& Piece::operator=(const Piece& other)
+{
+    if (this == &other)
+    {
+        return *this;
+    }
+
+    this->_color = other._color;
+    this->_type = other._type;
+    this->_currentCoords = other._currentCoords;
+
+    return *this;
+}
+

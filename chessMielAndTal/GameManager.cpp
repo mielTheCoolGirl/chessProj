@@ -22,10 +22,11 @@ void GameManager::switchPlayer()
 void GameManager::mainGame()
 {
 	std::string a = "";
+	std::string coords = "a1b1";
 	Board b;
 
 	b.printBoard();
-	/*try
+	try
 	{
 		turnExpn("a1g1", b);
 	}
@@ -37,8 +38,11 @@ void GameManager::mainGame()
 			std::cout << "src and dst are the same" << std::endl;
 		}
 		
-	}*/
-	std::cout << b.checkDanger(b.board[5][2]) << std::endl;
+	}
+	
+	//std::cout << b.checkDanger(b.board[5][2]) << std::endl;
+	//b.
+	//if(b.checkDanger)
 	b.printBoard();
 }
 
@@ -46,6 +50,7 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 {
 	std::string numSrc = "";
 	std::string numDst = "";
+	
 	if (coords.length() != 4)
 	{
 		throw int(5);
