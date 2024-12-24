@@ -92,8 +92,19 @@ bool Board::checkDanger(Piece* king)
 	std::string kingCoords = Piece::lettersToCoords(king->getCurrentCoords());
 	int kingX = kingCoords[1] - '0';
 	int kingY = kingCoords[0] - '0';
-	if (pawnCheck(king, kingX, kingY)||knightCheck(king,kingX,kingY)||checkHorizonAndVert(king, kingX, kingY)||diagonalCheck(king,kingX,kingY))
+	if (pawnCheck(king, kingX, kingY) || knightCheck(king, kingX, kingY) || checkHorizonAndVert(king, kingX, kingY) || diagonalCheck(king, kingX, kingY))
+	{
+		if (king->getColor() == WHITE)
+		{
+			_isChecking = BLACK_CHECKS;
+		}
+		else
+		{
+			_isChecking = WHITE_CHECKS;
+		}
 		return true;
+	}
+	_isChecking = 0;
 	return false;
 
 }
@@ -182,7 +193,6 @@ bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 		if ((isInBounds(kingX + 1, kingY + 1) && board[kingY + 1][kingX + 1] != nullptr && board[kingY + 1][kingX + 1]->getType() == 'p') ||
 			(isInBounds(kingX + 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'p'))
 		{
-			_isChecking = BLACK_CHECKS;
 			return true;
 		}
 	}
@@ -191,7 +201,6 @@ bool Board::pawnCheck(Piece* king, int kingX, int kingY)
 		if ((isInBounds(kingX - 1, kingY - 1) && board[kingY - 1][kingX - 1] != nullptr && board[kingY - 1][kingX - 1]->getType() == 'P') ||
 			(isInBounds(kingX + 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'P'))
 		{
-			_isChecking = WHITE_CHECKS;
 			return true;
 		}
 	}
@@ -215,14 +224,14 @@ bool Board::knightCheck(Piece* king, int kingX, int kingY)
 			{
 				if (board[posY][posX]->getColor() != king->getColor() && tolower(board[posY][posX]->getType()) == 'n')
 				{
-					if (board[posY][posX]->getColor())
+					/*if (board[posY][posX]->getColor())
 					{
 						_isChecking = WHITE_CHECKS;
 					}
 					else
 					{
 						_isChecking = BLACK_CHECKS;
-					}
+					}*/
 					return true;
 				}
 			}
