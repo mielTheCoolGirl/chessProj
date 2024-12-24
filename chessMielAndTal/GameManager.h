@@ -5,6 +5,7 @@ class GameManager
 {
 private:
 	bool _currentPlayer;
+	int _isChecking;
 public:
 	bool turnExpn(const std::string& coords, const Board& b);
 	bool getCurrentPlayer()const;

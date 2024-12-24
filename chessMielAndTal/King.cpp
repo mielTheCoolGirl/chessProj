@@ -21,7 +21,7 @@ King::~King()
 //	board.board[newCoords[0] - '0'][newCoords[1] - '0'] = nullptr;
 //}
 
-void King::move(Board& board, std::string dstCoords)
+void King::move(Board& b, std::string dstCoords)
 {
 	int srcY, srcX, dstY, dstX;
 	std::string coordsCalc = lettersToCoords(dstCoords);
@@ -32,30 +32,25 @@ void King::move(Board& board, std::string dstCoords)
 	dstY = coordsCalc[0] - '0';
 	dstX = coordsCalc[1] - '0';
 
-	/*if (board.board[y2][x2] != nullptr)
+	eaten = eat(b, coordsCalc);
+	delete (b.board[dstY][dstX]);
+	b.board[dstY][dstX] = b.board[srcY][srcX];
+	b.board[srcY][srcX] = nullptr;
+	if (b.checkDanger(b.board[dstY][dstX]))
 	{
-		if (board.board[y2][x2]->getColor() != this->getColor())
+		b.board[srcY][srcX] = new King();
+		*b.board[srcY][srcX] = *b.board[dstY][dstX]; //return king back to place
+		if (eaten == nullptr)
 		{
-			eat(board, coordsCalc);
+			delete (b.board[dstY][dstX]);
+			b.board[dstY][dstX] = nullptr;
 		}
 		else
-		{
-			throw int(3);
-		}
-	}*/
-
-	eaten = eat(board, coordsCalc);
-	board.board[dstY][dstX] = board.board[srcY][srcX];
-	board.board[srcY][srcX] = nullptr;
-	if (board.checkDanger(board.board[dstY][dstX]))
-	{
-		board.board[srcY][srcX] = new King();
-		*board.board[srcY][srcX] = *board.board[dstY][dstX]; //return king back to place
-		*board.board[dstY][dstX] = *eaten;
+			*b.board[dstY][dstX] = *eaten;
 		delete eaten;
 		throw(4); //check expn
 	}
-	board.board[dstY][dstX]->setCurrentCoords(dstCoords);
+	b.board[dstY][dstX]->setCurrentCoords(dstCoords);
 	delete eaten;
 	
 	

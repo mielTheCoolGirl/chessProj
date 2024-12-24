@@ -15,6 +15,11 @@ Piece::~Piece()
 Piece* Piece::eat(Board& b, const std::string& targetCoords)
 {
     Piece* p = b.board[int(targetCoords[0] - ASC_NUM_TO_NUM)][int(targetCoords[1] - ASC_NUM_TO_NUM)];
+    if (p == nullptr)
+    {
+        return nullptr;
+    }
+
     switch (tolower(p->getType()))
     {
     case 'r':

@@ -9,9 +9,6 @@ class Piece;
 class Board
 {
 private:
-	int _isChecking;
-	Piece* wKing;
-	Piece* bKing;
 	//function checks the rook/queen department
 	bool checkHorizonAndVert(Piece* king, int kingX, int kingY);
 	bool pawnCheck(Piece* king, int kingX, int kingY);
@@ -25,11 +22,11 @@ public:
 	~Board();
 	void printBoard()const;
 	//getter and setter
-	int getIsChecking()const;
-	void setIsChecking(int state);
 	static bool isInBounds(int x, int y);
+	Piece* findKing(const bool& color);
 	//checks danger for a king, returns true or false(checks for current king peice)
 	bool checkDanger(Piece* king);
+	
 
 	
 };

@@ -1,5 +1,6 @@
 #include "LinearMovement.h"
-
+#include "Rook.h"
+class Rook;
 LinearMovement::LinearMovement(char linearPieceType, std::string coords, const bool& color) :  Piece(linearPieceType, coords, color)
 {
 
@@ -13,6 +14,7 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 	std::string numSrc = lettersToCoords(this->_currentCoords);
 	std::string numDst = lettersToCoords(dstCoords);
 	Piece* eaten = nullptr;
+	Piece* king = nullptr;
 	int srcX = int(numSrc[1] - ASC_NUM_TO_NUM); int srcY = int(numSrc[0] - ASC_NUM_TO_NUM);
 	int dstX = int(numDst[1] - ASC_NUM_TO_NUM); int dstY = int(numDst[0] - ASC_NUM_TO_NUM);
 	//change of X and Y per tile 
@@ -30,10 +32,36 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 		y += dy;
 	}
 	
-	eaten = b.board[dstY][dstX];
+	eaten = eat(b, numDst);
+	delete (b.board[dstY][dstX]);
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
 	
+	king = b.findKing(b.board[dstY][dstX]->getColor());
+	if (b.checkDanger(b.board[dstY][dstX]))
+	{
+		if (b.board[dstY][dstX]->getType() == tolower('r'))
+		{
+			b.board[srcY][srcX] = new Rook();
+		}
+		else
+		{
+			b.board[srcY][srcX] = new Rook(); //currently there is only rook
+		}
+		
+		*b.board[srcY][srcX] = *b.board[dstY][dstX]; //return king back to place
+		if (eaten == nullptr)
+		{
+			delete (b.board[dstY][dstX]);
+			b.board[dstY][dstX] = nullptr;
+		}
+		else
+		{
+			*b.board[dstY][dstX] = *eaten;
+		}
+		delete eaten;
+		throw(4); //check expn
+	}
 	
 	b.board[dstY][dstX]->setCurrentCoords(dstCoords); //new coords of piece
 	

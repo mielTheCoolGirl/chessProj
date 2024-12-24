@@ -1,6 +1,9 @@
 #include "GameManager.h"
 #include "Board.h"
 
+#define BLACK_CHECKS 2 
+#define WHITE_CHECKS 1
+
 bool GameManager::getCurrentPlayer() const
 {
 	return _currentPlayer;
@@ -22,16 +25,15 @@ void GameManager::switchPlayer()
 void GameManager::mainGame()
 {
 	std::string a = "";
-	std::string coords = "c3c2";
+	std::string coords = "a7a5";
 	Board b;
 	_currentPlayer = WHITE;
 	b.printBoard();
 	try
 	{
 		turnExpn(coords, b);
-		b.board[5][2]->move(b, coords.substr(2, 4));
+		b.board[1][0]->move(b, coords.substr(2, 4));
 		
-		if(b.checkDanger()
 	}
 	
 	catch (int e)

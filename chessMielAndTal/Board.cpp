@@ -4,9 +4,8 @@
 #include "King.h"
 #define A_VALUE 97
 
-#define BLACK_CHECKS 2 
-#define WHITE_CHECKS 1
-Board::Board() :
+
+Board::Board()
 {
 
 	for (int i = 0; i < BOARD_LEN; i++)
@@ -306,6 +305,20 @@ bool Board::kingDanger(Piece* king, int kingX, int kingY)
 		}
 	}
 	return false;
+}
+
+Piece* Board::findKing(const bool& color)
+{
+	for (int i = 0; i < BOARD_LEN;i++)
+	{
+		for (int j = 0; i < BOARD_LEN;j++)
+		{
+			if (board[i][j] != nullptr && board[i][j]->getColor() == color && tolower(board[i][j]->getType()) == 'k')
+			{
+				return board[i][j];
+			}
+		}
+	}
 }
 
 

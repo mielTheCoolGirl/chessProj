@@ -4,6 +4,9 @@ Rook::Rook(const char& rookType, const std::string& coords, const bool& color) :
 
 }
 
+Rook::Rook() : LinearMovement('r', "0000", WHITE)
+{
+}
 Rook::~Rook()
 {
 }
