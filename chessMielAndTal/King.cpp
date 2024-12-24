@@ -4,6 +4,12 @@ King::King(const char& kingType, const std::string& coords, const bool& color) :
 {
 
 }
+King::King() : Piece('k', "0000", true)
+{
+}
+
+
+
 King::~King()
 {
 }
@@ -41,15 +47,15 @@ void King::move(Board& board, std::string dstCoords)
 	eaten = eat(board, coordsCalc);
 	board.board[dstY][dstX] = board.board[srcY][srcX];
 	board.board[srcY][srcX] = nullptr;
-
 	if (board.checkDanger(board.board[dstY][dstX]))
 	{
-		board.board[srcY][srcX] = board.board[dstY][dstX]; //return king back to place
+		board.board[srcY][srcX] = new King();
+		*board.board[srcY][srcX] = *board.board[dstY][dstX]; //return king back to place
 		*board.board[dstY][dstX] = *eaten;
 		delete eaten;
 		throw(4); //check expn
 	}
-
+	board.board[dstY][dstX]->setCurrentCoords(dstCoords);
 	delete eaten;
 	
 	

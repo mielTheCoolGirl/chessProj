@@ -15,7 +15,7 @@ bool Rook::legalMovement(const std::string& dstCoords)const
 	if ((this->_currentCoords[0] == dstCoords[0] && this->_currentCoords[1] != dstCoords[1]) ||
 		 this->_currentCoords[0] != dstCoords[0] && this->_currentCoords[1] != dstCoords[1])
 	{
-		return false;
+		return true;
 	}
-	return true;
+	return false;
 }

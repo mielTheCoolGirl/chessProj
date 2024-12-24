@@ -3,8 +3,7 @@
 #include "Bishop.h"
 #include "King.h"
 #define A_VALUE 97
-#define WHITE 1
-#define BLACK 0
+
 #define BLACK_CHECKS 2 
 #define WHITE_CHECKS 1
 Board::Board() : _isChecking(0)
@@ -349,7 +348,7 @@ bool Board::kingDanger(Piece* king, int kingX, int kingY)
 	{
 		for (int j = kingX - 1; j <= kingY + 1; j++)
 		{
-			if (isInBounds(j, i) && board[i][j]->getColor() != king->getColor() && tolower(board[i][j]->getType()) == 'k')
+			if ((board[i][j] == nullptr) || (isInBounds(j, i) && board[i][j]->getColor() != king->getColor() && tolower(board[i][j]->getType()) == 'k'))
 			{
 				return true;
 			}
