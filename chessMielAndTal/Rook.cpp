@@ -8,10 +8,6 @@ Rook::~Rook()
 {
 }
 
-void Rook::eat(Board & board, const std::string & endCoords)
-{
-}
-
 
 bool Rook::legalMovement(const std::string& dstCoords)const
 {

@@ -6,6 +6,5 @@ class Rook : public LinearMovement
 public:
 	Rook(const char& rookType, const std::string& coords, const bool& color);
 	~Rook();
-	void eat(Board & board, const std::string & endCoords)override ;
 	bool legalMovement(const std::string& dstCoords) const override;
 };

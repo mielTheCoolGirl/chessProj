@@ -12,7 +12,7 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 	//The function is checked assuming that there isnt same color piece in target slot 
 	std::string numSrc = lettersToCoords(this->_currentCoords);
 	std::string numDst = lettersToCoords(dstCoords);
-
+	Piece* eaten = nullptr;
 	int srcX = int(numSrc[1] - ASC_NUM_TO_NUM); int srcY = int(numSrc[0] - ASC_NUM_TO_NUM);
 	int dstX = int(numDst[1] - ASC_NUM_TO_NUM); int dstY = int(numDst[0] - ASC_NUM_TO_NUM);
 	//change of X and Y per tile 
@@ -29,15 +29,14 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 		x += dx;
 		y += dy;
 	}
-
 	
+	eaten = b.board[dstY][dstX];
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
+	
 	
 	b.board[dstY][dstX]->setCurrentCoords(dstCoords); //new coords of piece
 	
 }
 
-void LinearMovement::eat(Board & board, const std::string & endCoords)
-{
-}
+

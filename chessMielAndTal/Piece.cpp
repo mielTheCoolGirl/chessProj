@@ -1,5 +1,8 @@
 #include "Piece.h"
-
+#include "Rook.h"
+class Rook;
+#include "King.h"
+class King;
 Piece::Piece(const char& type, const std::string& currentCoords, const bool& color): 
     _color(color), _type(type),_currentCoords(currentCoords)
 {
@@ -7,6 +10,18 @@ Piece::Piece(const char& type, const std::string& currentCoords, const bool& col
 
 Piece::~Piece()
 {
+}
+
+Piece* Piece::eat(Board& b, const std::string& targetCoords)
+{
+    Piece* p = b.board[int(targetCoords[0] - ASC_NUM_TO_NUM)][int(targetCoords[1] - ASC_NUM_TO_NUM)];
+    switch (tolower(p->getType()))
+    {
+    case 'r':
+        return new Rook(p->_type, p->_currentCoords, p->_color);
+    default:
+        return nullptr;
+    }
 }
 
 

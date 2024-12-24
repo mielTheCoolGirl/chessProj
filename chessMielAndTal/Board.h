@@ -9,11 +9,14 @@ class Board
 {
 private:
 	int _isChecking;
+	Piece* wKing;
+	Piece* bKing;
 	//function checks the rook/queen department
 	bool checkHorizonAndVert(Piece* king, int kingX, int kingY);
 	bool pawnCheck(Piece* king, int kingX, int kingY);
 	bool knightCheck(Piece* king, int kingX, int kingY);
 	bool diagonalCheck(Piece* king, int kingX, int kingY);
+	bool kingDanger(Piece* king, int kingX, int kingY);
 	
 public:
 	Piece* board[BOARD_LEN][BOARD_LEN];

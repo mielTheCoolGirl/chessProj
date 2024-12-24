@@ -92,16 +92,16 @@ bool Board::checkDanger(Piece* king)
 	std::string kingCoords = Piece::lettersToCoords(king->getCurrentCoords());
 	int kingX = kingCoords[1] - '0';
 	int kingY = kingCoords[0] - '0';
-	if (pawnCheck(king, kingX, kingY) || knightCheck(king, kingX, kingY) || checkHorizonAndVert(king, kingX, kingY) || diagonalCheck(king, kingX, kingY))
+	if (kingDanger(king, kingX, kingY) ||pawnCheck(king, kingX, kingY) || knightCheck(king, kingX, kingY) || checkHorizonAndVert(king, kingX, kingY) || diagonalCheck(king, kingX, kingY))
 	{
-		if (king->getColor() == WHITE)
+		/*if (king->getColor() == WHITE)
 		{
 			_isChecking = BLACK_CHECKS;
 		}
 		else
 		{
 			_isChecking = WHITE_CHECKS;
-		}
+		}*/
 		return true;
 	}
 	_isChecking = 0;
@@ -245,7 +245,7 @@ bool Board::knightCheck(Piece* king, int kingX, int kingY)
 bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 {
 	bool possibleThreat = true;
-	for (int i = kingX, j = kingY; i < BOARD_LEN && j < BOARD_LEN && possibleThreat == true; i++, j++)
+	for (int i = kingX + 1, j = kingY + 1; i < BOARD_LEN && j < BOARD_LEN && possibleThreat == true; i++, j++)
 	{
 		if (board[j][i] != nullptr)
 		{
@@ -267,8 +267,9 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 			}
 		}
 	}
-	
-	for (int i = kingX, j = kingY; i >= 0 && j >= 0 && possibleThreat == true; i--, j--)
+
+	possibleThreat = true;
+	for (int i = kingX - 1, j = kingY - 1; i >= 0 && j >= 0 && possibleThreat == true; i--, j--)
 	{
 		if (board[j][i] != nullptr)
 		{
@@ -292,7 +293,8 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		}
 	}
 	
-	for (int i = kingX, j = kingY; i >= 0 && j < BOARD_LEN && possibleThreat == true; i--, j++)
+	possibleThreat = true;
+	for (int i = kingX - 1, j = kingY + 1; i >= 0 && j < BOARD_LEN && possibleThreat == true; i--, j++)
 	{
 		if (board[j][i] != nullptr)
 		{
@@ -315,7 +317,8 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		}
 	}
 
-	for (int i = kingX, j = kingY; i < BOARD_LEN && j >= 0; i++, j--)
+	possibleThreat = true;
+	for (int i = kingX + 1, j = kingY - 1; i < BOARD_LEN && j >= 0 && possibleThreat == true; i++, j--)
 	{
 		if (board[j][i] != nullptr)
 		{
@@ -338,6 +341,21 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		}
 	}
 	return possibleThreat;
+}
+
+bool Board::kingDanger(Piece* king, int kingX, int kingY)
+{
+	for (int i = kingY - 1; i <= kingY + 1; i++)
+	{
+		for (int j = kingX - 1; j <= kingY + 1; j++)
+		{
+			if (isInBounds(j, i) && board[i][j]->getColor() != king->getColor() && tolower(board[i][j]->getType()) == 'k')
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 
