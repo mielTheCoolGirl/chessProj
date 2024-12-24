@@ -6,7 +6,7 @@
 
 #define BLACK_CHECKS 2 
 #define WHITE_CHECKS 1
-Board::Board() : _isChecking(0)
+Board::Board() :
 {
 
 	for (int i = 0; i < BOARD_LEN; i++)
@@ -76,15 +76,6 @@ void Board::printBoard() const
 	std::cout << boardRes << std::endl;
 }
 
-int Board::getIsChecking() const
-{
-	return _isChecking;
-}
-
-void Board::setIsChecking(int state)
-{
-	_isChecking = state;
-}
 
 bool Board::checkDanger(Piece* king)
 {
@@ -93,17 +84,9 @@ bool Board::checkDanger(Piece* king)
 	int kingY = kingCoords[0] - '0';
 	if (kingDanger(king, kingX, kingY) ||pawnCheck(king, kingX, kingY) || knightCheck(king, kingX, kingY) || checkHorizonAndVert(king, kingX, kingY) || diagonalCheck(king, kingX, kingY))
 	{
-		/*if (king->getColor() == WHITE)
-		{
-			_isChecking = BLACK_CHECKS;
-		}
-		else
-		{
-			_isChecking = WHITE_CHECKS;
-		}*/
 		return true;
 	}
-	_isChecking = 0;
+	
 	return false;
 
 }
@@ -251,14 +234,6 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
 				possibleThreat = true;
-				if (board[j][i]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
 			}
 			else //if its a piece that doesnt threaten the king(diagonally)
 			{
@@ -275,14 +250,6 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
 				possibleThreat = true;
-				if (board[j][i]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
 			}
 			else
 			{
@@ -300,14 +267,6 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
 				possibleThreat = true;
-				if (board[j][i]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
 			}
 			else
 			{
@@ -324,14 +283,6 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
 				possibleThreat = true;
-				if (board[j][i]->getColor())
-				{
-					_isChecking = WHITE_CHECKS;
-				}
-				else
-				{
-					_isChecking = BLACK_CHECKS;
-				}
 			}
 			else
 			{

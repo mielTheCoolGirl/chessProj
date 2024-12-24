@@ -31,6 +31,7 @@ void GameManager::mainGame()
 		turnExpn(coords, b);
 		b.board[5][2]->move(b, coords.substr(2, 4));
 		
+		if(b.checkDanger()
 	}
 	
 	catch (int e)
