@@ -60,10 +60,16 @@ void GameManager::mainGame()
 			
 			cout << "Enter Move: ";
 			std::cin >> coords;
-			int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = (coords[1] - ASC_NUM_TO_NUM - 1);
-			int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = (coords[3] - ASC_NUM_TO_NUM - 1);
+			int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = BOARD_LEN - (coords[1] - ASC_NUM_TO_NUM);
+			int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = BOARD_LEN - (coords[3] - ASC_NUM_TO_NUM);
 			turnExpn(coords, b);
 			b.board[srcY][srcX]->move(b, coords.substr(2, 4));
+
+			if (b.checkDanger(b.findKing(!_currentPlayer)))
+			{
+				cout << "Youv'e made a check!" << endl;
+			}
+			
 			_currentPlayer = !_currentPlayer;
 		}
 

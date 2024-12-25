@@ -14,6 +14,7 @@ void King::move(Board& b, std::string dstCoords)
 	int srcY, srcX, dstY, dstX;
 	std::string coordsCalc = lettersToCoords(dstCoords);
 	std::string firstCoords = lettersToCoords(_currentCoords);
+	std::string prevCoords = _currentCoords;
 	Piece* eaten = nullptr;
 	srcY = firstCoords[0] - '0';
 	srcX = firstCoords[1] - '0';
@@ -23,15 +24,16 @@ void King::move(Board& b, std::string dstCoords)
 	eaten = eat(b, coordsCalc);
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
+	b.board[dstY][dstX]->setCurrentCoords(dstCoords);
 
 	if (b.checkDanger(b.board[dstY][dstX])) //if king is checked
 	{
+		b.board[dstY][dstX]->setCurrentCoords(prevCoords);
 		b.board[srcY][srcX] = b.board[dstY][dstX];
 		b.board[dstY][dstX] = eaten;
 		delete eaten;
 		throw(4); //check expn
 	}
-	b.board[dstY][dstX]->setCurrentCoords(dstCoords);
 	delete eaten;
 	
 	

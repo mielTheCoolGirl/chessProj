@@ -18,7 +18,7 @@ Board::Board(const std::string& build)
 		for (int j = 0; j < BOARD_LEN; j++)
 		{
 			src += char(j + LOWER_LET_TO_NUM);
-			src += char(i + ASC_NUM_TO_NUM + 1);
+			src += char(BOARD_LEN - i + ASC_NUM_TO_NUM);
 			index = i * BOARD_LEN + j;
 			switch (tolower(build[index]))
 			{
@@ -31,6 +31,7 @@ Board::Board(const std::string& build)
 			default:
 				board[i][j] = nullptr;
 			}
+			src = "";
 		}
 	}
 }
@@ -235,7 +236,7 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		{
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
-				possibleThreat = true;
+				return true;
 			}
 			else //if its a piece that doesnt threaten the king(diagonally)
 			{
@@ -251,7 +252,7 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		{
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
-				possibleThreat = true;
+				return true;
 			}
 			else
 			{
@@ -268,7 +269,7 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		{
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
-				possibleThreat = true;
+				return true;
 			}
 			else
 			{
@@ -284,7 +285,7 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 		{
 			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
 			{
-				possibleThreat = true;
+				return true;
 			}
 			else
 			{
@@ -292,7 +293,7 @@ bool Board::diagonalCheck(Piece* king, int kingX, int kingY)
 			}
 		}
 	}
-	return possibleThreat;
+	return false;
 }
 
 bool Board::kingDanger(Piece* king, int kingX, int kingY)
