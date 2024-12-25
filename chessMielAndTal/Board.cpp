@@ -2,39 +2,31 @@
 #include "Rook.h"
 #include "Bishop.h"
 #include "King.h"
-#define A_VALUE 97
 
 
-Board::Board()
+Board::Board(const std::string& build)
 {
-
+	int index = 0;
+	std::string src = "";
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
 		for (int j = 0; j < BOARD_LEN; j++)
-			board[i][j] = nullptr;
+		{
+			src = char(j + LOWER_LET_TO_NUM) + char(i + ASC_NUM_TO_NUM);
+			index = i * BOARD_LEN + j;
+			switch (tolower(build[index]))
+			{
+			case 'k':
+				board[i][j] = new King(build[index], src);
+				break;
+			case 'r':
+				board[i][j] = new Rook(build[index], src);
+				break;
+			default:
+				board[i][j] = nullptr;
+			}
+		}
 	}
-	//putting all the rooks in place(for checking, in the main game it will be pawns)
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		std::string resCoord = "";
-		char res = char(i + A_VALUE);
-		resCoord += res;
-		resCoord += "7";
-		board[1][i] = new Rook('R', resCoord, WHITE);
-
-	}
-	for (int i = 0; i < BOARD_LEN; i++)
-	{
-		std::string resCoord = "";
-		char res = char(i + A_VALUE);
-		resCoord += res;
-		resCoord += "2";
-		board[6][i] = new Rook('r', resCoord, BLACK);
-	}
-	//setting them up just for testing
-	/*board[7][0] = new Bishop('b', "a1", BLACK);
-	board[6][1] = new Bishop('B', "b2", WHITE);*/
-	board[7][0] = new King('K', "c3", WHITE);//setting up a king 
 }
 
 Board::~Board()

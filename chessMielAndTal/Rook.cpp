@@ -1,12 +1,9 @@
 #include "Rook.h"
-Rook::Rook(const char& rookType, const std::string& coords, const bool& color) : LinearMovement(rookType, coords, color)
+Rook::Rook(const char& rookType, const std::string& coords) : LinearMovement(rookType, coords)
 {
 
 }
 
-Rook::Rook() : LinearMovement('r', "0000", WHITE)
-{
-}
 Rook::~Rook()
 {
 }

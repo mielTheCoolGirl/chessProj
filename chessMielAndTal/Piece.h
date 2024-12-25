@@ -13,7 +13,7 @@ protected:
 	std::string _currentCoords;
 	bool _color; //true is white, false is black
 public:
-	Piece(const char& type, const std::string& currentCoords, const bool& color);
+	Piece(const char& type, const std::string& currentCoords);
 	virtual ~Piece();
 
 	Piece* eat(Board & b, const std::string & targetCoords);

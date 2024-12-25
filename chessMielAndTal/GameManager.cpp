@@ -26,7 +26,9 @@ void GameManager::mainGame()
 {
 	std::string a = "";
 	std::string coords = "a7a5";
-	Board b;
+	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1";
+
+	Board b(build);
 	
 	int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = (coords[1] - ASC_NUM_TO_NUM - 1);
 	int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = (coords[3] - ASC_NUM_TO_NUM - 1);

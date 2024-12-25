@@ -1,7 +1,7 @@
 #include "Bishop.h"
 
-Bishop::Bishop(const char& bishopType, const std::string& coords, const bool& color) : 
-	LinearMovement(bishopType, coords, color)
+Bishop::Bishop(const char& bishopType, const std::string& coords) : 
+	LinearMovement(bishopType, coords)
 {
 }
 

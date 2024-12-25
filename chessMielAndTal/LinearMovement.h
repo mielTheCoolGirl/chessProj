@@ -5,7 +5,7 @@
 class LinearMovement: public Piece
 {
 public:
-	LinearMovement(char linearPieceType, std::string coords, const bool& color);
+	LinearMovement(char linearPieceType, std::string coords);
 	~LinearMovement();
 	void move(Board& b, std::string dstCoords) override;
 

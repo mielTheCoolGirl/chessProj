@@ -1,14 +1,9 @@
 #include "King.h"
 #define BOARD_LEN 8
-King::King(const char& kingType, const std::string& coords, const bool& color) : Piece(kingType, coords, color)
+King::King(const char& kingType, const std::string& coords) : Piece(kingType, coords)
 {
 
 }
-King::King() : Piece('k', "0000", WHITE)
-{
-}
-
-
 
 King::~King()
 {
@@ -26,7 +21,6 @@ void King::move(Board& b, std::string dstCoords)
 	dstX = coordsCalc[1] - '0';
 
 	eaten = eat(b, coordsCalc);
-	//delete (b.board[dstY][dstX]);
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
 
@@ -34,16 +28,7 @@ void King::move(Board& b, std::string dstCoords)
 	{
 		b.board[srcY][srcX] = b.board[dstY][dstX];
 		b.board[dstY][dstX] = eaten;
-		//b.board[srcY][srcX] = new King();
-		//*b.board[srcY][srcX] = *b.board[dstY][dstX]; //return king back to place
-		//if (eaten == nullptr)
-		//{
-		//	delete (b.board[dstY][dstX]);
-		//	b.board[dstY][dstX] = nullptr;
-		//}
-		//else
-		//	*b.board[dstY][dstX] = *eaten;
-		//delete eaten;
+		delete eaten;
 		throw(4); //check expn
 	}
 	b.board[dstY][dstX]->setCurrentCoords(dstCoords);

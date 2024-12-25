@@ -4,8 +4,7 @@
 class King :public Piece
 {
 public:
-	King(const char& kingType, const std::string& coords, const bool& color);
-	King();
+	King(const char& kingType, const std::string& coords);
 	~King();
 
 	

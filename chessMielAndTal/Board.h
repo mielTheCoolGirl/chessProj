@@ -18,7 +18,7 @@ private:
 	
 public:
 	Piece* board[BOARD_LEN][BOARD_LEN];
-	Board();
+	Board(const std::string& build);
 	~Board();
 	void printBoard()const;
 	//getter and setter

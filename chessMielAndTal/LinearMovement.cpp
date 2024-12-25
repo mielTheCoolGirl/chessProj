@@ -1,7 +1,7 @@
 #include "LinearMovement.h"
 #include "Rook.h"
 class Rook;
-LinearMovement::LinearMovement(char linearPieceType, std::string coords, const bool& color) :  Piece(linearPieceType, coords, color)
+LinearMovement::LinearMovement(char linearPieceType, std::string coords) :  Piece(linearPieceType, coords)
 {
 
 }
@@ -33,32 +33,14 @@ void LinearMovement::move(Board& b, std::string dstCoords)
 	}
 	
 	eaten = eat(b, numDst);
-	delete (b.board[dstY][dstX]);
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
 	
 	king = b.findKing(b.board[dstY][dstX]->getColor());
-	if (b.checkDanger(b.board[dstY][dstX]))
+	if (b.checkDanger(b.board[dstY][dstX])) //if king is checked
 	{
-		if (b.board[dstY][dstX]->getType() == tolower('r'))
-		{
-			b.board[srcY][srcX] = new Rook();
-		}
-		else
-		{
-			b.board[srcY][srcX] = new Rook(); //currently there is only rook
-		}
-		
-		*b.board[srcY][srcX] = *b.board[dstY][dstX]; //return king back to place
-		if (eaten == nullptr)
-		{
-			delete (b.board[dstY][dstX]);
-			b.board[dstY][dstX] = nullptr;
-		}
-		else
-		{
-			*b.board[dstY][dstX] = *eaten;
-		}
+		b.board[srcY][srcX] = b.board[dstY][dstX];
+		b.board[dstY][dstX] = eaten;
 		delete eaten;
 		throw(4); //check expn
 	}

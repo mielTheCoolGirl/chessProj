@@ -3,9 +3,17 @@
 class Rook;
 #include "King.h"
 class King;
-Piece::Piece(const char& type, const std::string& currentCoords, const bool& color): 
-    _color(color), _type(type),_currentCoords(currentCoords)
+Piece::Piece(const char& type, const std::string& currentCoords): 
+    _type(type), _currentCoords(currentCoords)
 {
+    if (islower(type))
+    {
+        _color = BLACK;
+    }
+    else
+    {
+        _color = WHITE;
+    }
 }
 
 Piece::~Piece()
@@ -23,7 +31,7 @@ Piece* Piece::eat(Board& b, const std::string& targetCoords)
     switch (tolower(p->getType()))
     {
     case 'r':
-        return new Rook(p->_type, p->_currentCoords, p->_color);
+        return new Rook(p->_type, p->_currentCoords);
     default:
         return nullptr;
     }
