@@ -10,5 +10,5 @@ public:
 	bool getCurrentPlayer()const;
 	void setCurrentPlayer(bool current);
 	void switchPlayer();
-	void mainGame();
+	const char* mainGame(std::string inputCoords);
 };

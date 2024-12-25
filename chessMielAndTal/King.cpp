@@ -36,10 +36,6 @@ void King::move(Board& b, std::string dstCoords)
 	}
 	delete eaten;
 	
-	
-
-		
-	
 
 }
 
