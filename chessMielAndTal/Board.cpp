@@ -3,6 +3,8 @@
 #include "Bishop.h"
 #include "King.h"
 
+using std::cout;
+using std::endl;
 
 Board::Board(const std::string& build)
 {
@@ -49,19 +51,27 @@ Board::~Board()
 void Board::printBoard() const
 {
 	std::string boardRes = "";
+	cout << "  ";
+	for (char xAxis = 'a'; xAxis < 'i'; xAxis++)
+	{
+		std::cout << xAxis << " ";
+	}
+	cout << endl;
+	
+
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
+		std::cout << i << " ";
 		for (int j = 0; j < BOARD_LEN; j++)
 		{
 			if (board[i][j] == nullptr)
-				boardRes += "#";
+				cout << "# ";
 			else
-				boardRes += board[i][j]->getType();
-			boardRes += " ";
+				cout << board[i][j]->getType() << " ";
 		}
-		boardRes += "\n";
+		cout << endl;
 	}
-	std::cout << boardRes << std::endl;
+	cout << endl;
 }
 
 
