@@ -39,17 +39,6 @@ void GameManager::mainGame()
 		turnExpn(coords, b);
 		b.board[srcY][srcX]->move(b, coords.substr(2, 4));
 		
-		if (b.checkDanger(b.findKing(!_currentPlayer)))
-		{
-			switch (_currentPlayer)
-			{
-			case WHITE:
-				_isChecking = WHITE_CHECKS;
-				break;
-			default:
-				_isChecking = BLACK_CHECKS;
-			}
-		}
 	}
 	
 	catch (int e)
