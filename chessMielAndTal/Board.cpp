@@ -34,10 +34,7 @@ Board::Board()
 	//setting them up just for testing
 	/*board[7][0] = new Bishop('b', "a1", BLACK);
 	board[6][1] = new Bishop('B', "b2", WHITE);*/
-	board[5][2] = new King('K', "c3", WHITE);//setting up a king 
-	
-
-
+	board[7][0] = new King('K', "c3", WHITE);//setting up a king 
 }
 
 Board::~Board()
@@ -296,9 +293,9 @@ bool Board::kingDanger(Piece* king, int kingX, int kingY)
 {
 	for (int i = kingY - 1; i <= kingY + 1; i++)
 	{
-		for (int j = kingX - 1; j <= kingY + 1; j++)
+		for (int j = kingX - 1; j <= kingX + 1; j++)
 		{
-			if ((board[i][j] == nullptr) || (isInBounds(j, i) && board[i][j]->getColor() != king->getColor() && tolower(board[i][j]->getType()) == 'k'))
+			if (isInBounds(j, i) && board[i][j] != nullptr && board[i][j]->getColor() != king->getColor() && tolower(board[i][j]->getType()) == 'k')
 			{
 				return true;
 			}
@@ -311,7 +308,7 @@ Piece* Board::findKing(const bool& color)
 {
 	for (int i = 0; i < BOARD_LEN;i++)
 	{
-		for (int j = 0; i < BOARD_LEN;j++)
+		for (int j = 0; j < BOARD_LEN;j++)
 		{
 			if (board[i][j] != nullptr && board[i][j]->getColor() == color && tolower(board[i][j]->getType()) == 'k')
 			{

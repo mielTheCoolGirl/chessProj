@@ -4,7 +4,7 @@ King::King(const char& kingType, const std::string& coords, const bool& color) :
 {
 
 }
-King::King() : Piece('k', "0000", true)
+King::King() : Piece('k', "0000", WHITE)
 {
 }
 
@@ -13,13 +13,6 @@ King::King() : Piece('k', "0000", true)
 King::~King()
 {
 }
-
-//void King::eat(Board& board, const std::string& endCoords)
-//{
-//	std::string newCoords = lettersToCoords(_currentCoords);
-//	board.board[endCoords[0] - '0'][endCoords[1] - '0'] = board.board[newCoords[0] - '0'][newCoords[1] - '0'];
-//	board.board[newCoords[0] - '0'][newCoords[1] - '0'] = nullptr;
-//}
 
 void King::move(Board& b, std::string dstCoords)
 {
@@ -33,21 +26,24 @@ void King::move(Board& b, std::string dstCoords)
 	dstX = coordsCalc[1] - '0';
 
 	eaten = eat(b, coordsCalc);
-	delete (b.board[dstY][dstX]);
+	//delete (b.board[dstY][dstX]);
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
-	if (b.checkDanger(b.board[dstY][dstX]))
+
+	if (b.checkDanger(b.board[dstY][dstX])) //if king is checked
 	{
-		b.board[srcY][srcX] = new King();
-		*b.board[srcY][srcX] = *b.board[dstY][dstX]; //return king back to place
-		if (eaten == nullptr)
-		{
-			delete (b.board[dstY][dstX]);
-			b.board[dstY][dstX] = nullptr;
-		}
-		else
-			*b.board[dstY][dstX] = *eaten;
-		delete eaten;
+		b.board[srcY][srcX] = b.board[dstY][dstX];
+		b.board[dstY][dstX] = eaten;
+		//b.board[srcY][srcX] = new King();
+		//*b.board[srcY][srcX] = *b.board[dstY][dstX]; //return king back to place
+		//if (eaten == nullptr)
+		//{
+		//	delete (b.board[dstY][dstX]);
+		//	b.board[dstY][dstX] = nullptr;
+		//}
+		//else
+		//	*b.board[dstY][dstX] = *eaten;
+		//delete eaten;
 		throw(4); //check expn
 	}
 	b.board[dstY][dstX]->setCurrentCoords(dstCoords);

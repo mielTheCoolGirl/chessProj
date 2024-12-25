@@ -27,13 +27,27 @@ void GameManager::mainGame()
 	std::string a = "";
 	std::string coords = "a7a5";
 	Board b;
+	
+	int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = (coords[1] - ASC_NUM_TO_NUM - 1);
+	int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = (coords[3] - ASC_NUM_TO_NUM - 1);
 	_currentPlayer = WHITE;
 	b.printBoard();
 	try
 	{
 		turnExpn(coords, b);
-		b.board[1][0]->move(b, coords.substr(2, 4));
+		b.board[srcY][srcX]->move(b, coords.substr(2, 4));
 		
+		if (b.checkDanger(b.findKing(!_currentPlayer)))
+		{
+			switch (_currentPlayer)
+			{
+			case WHITE:
+				_isChecking = WHITE_CHECKS;
+				break;
+			default:
+				_isChecking = BLACK_CHECKS;
+			}
+		}
 	}
 	
 	catch (int e)
