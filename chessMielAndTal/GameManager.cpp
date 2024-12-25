@@ -3,6 +3,11 @@
 
 #define BLACK_CHECKS 2 
 #define WHITE_CHECKS 1
+#define MAX_LEN 65
+
+using std::cout;
+using std::cin;
+using std::endl;
 
 bool GameManager::getCurrentPlayer() const
 {
@@ -28,33 +33,62 @@ void GameManager::mainGame()
 	std::string coords = "a7a5";
 	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1";
 
+	//cout << "Enter board build: "; //rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1
+	//std::getline(std::cin, build);
+	//if (build.length() > MAX_LEN)
+	//{
+	//	build.erase(MAX_LEN);
+	//}
+	_currentPlayer = build[MAX_LEN - 1];
+
+	build.pop_back();
 	Board b(build);
-	
-	int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = (coords[1] - ASC_NUM_TO_NUM - 1);
-	int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = (coords[3] - ASC_NUM_TO_NUM - 1);
-	_currentPlayer = WHITE;
 	b.printBoard();
-	try
+
+	while (coords != "exit")
 	{
-		turnExpn(coords, b);
-		b.board[srcY][srcX]->move(b, coords.substr(2, 4));
-		
+		try
+		{
+			switch (_currentPlayer)
+			{
+			case WHITE:
+				cout << "Current Player: white" << endl;
+				break;
+			default:
+				cout << "Current Player: black" << endl;
+			}
+			
+			cout << "Enter Move: ";
+			std::cin >> coords;
+			int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = (coords[1] - ASC_NUM_TO_NUM - 1);
+			int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = (coords[3] - ASC_NUM_TO_NUM - 1);
+			turnExpn(coords, b);
+			b.board[srcY][srcX]->move(b, coords.substr(2, 4));
+			_currentPlayer = !_currentPlayer;
+		}
+
+		catch (int e)
+		{
+			
+			if (e == 7)
+			{
+				std::cout << "src and dst are the same" << std::endl;
+			}
+			else if (e == 4)
+			{
+				std::cout << "Error: check will occur on you king with this move" << std::endl;
+			}
+			else
+			{
+				cout << "Error. Code: " << e << endl;
+			}
+
+		}
+		b.printBoard();
 	}
 	
-	catch (int e)
-	{
-		if (e == 7)
-		{
-			std::cout << "src and dst are the same" << std::endl;
-		}
-		if (e == 4)
-		{
-			std::cout << "Error: check will occur on you king with this move" << std::endl;
-		}
-		
-	}
 	
-	b.printBoard();
+	
 }
 
 bool GameManager::turnExpn(const std::string& coords, const Board& b)

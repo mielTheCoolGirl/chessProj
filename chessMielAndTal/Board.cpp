@@ -3,6 +3,9 @@
 #include "Bishop.h"
 #include "King.h"
 
+#define LOWER_LET_TO_NUM 97
+#define ASC_NUM_TO_NUM '0'
+
 using std::cout;
 using std::endl;
 
@@ -14,7 +17,8 @@ Board::Board(const std::string& build)
 	{
 		for (int j = 0; j < BOARD_LEN; j++)
 		{
-			src = char(j + LOWER_LET_TO_NUM) + char(i + ASC_NUM_TO_NUM);
+			src += char(j + LOWER_LET_TO_NUM);
+			src += char(i + ASC_NUM_TO_NUM + 1);
 			index = i * BOARD_LEN + j;
 			switch (tolower(build[index]))
 			{
@@ -61,7 +65,7 @@ void Board::printBoard() const
 
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
-		std::cout << i << " ";
+		std::cout << BOARD_LEN - i << " ";
 		for (int j = 0; j < BOARD_LEN; j++)
 		{
 			if (board[i][j] == nullptr)
