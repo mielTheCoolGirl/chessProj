@@ -10,6 +10,7 @@ Pawn::~Pawn()
 
 void Pawn::move(Board& board, const std::string dstCoords)
 {
+	_isFirstTurn = false;//after the first move it can no longer move two steps at a time
 	int srcX, srcY, dstX, dstY;
 	Piece* eaten = nullptr;
 	Piece* king = nullptr;
@@ -21,7 +22,7 @@ void Pawn::move(Board& board, const std::string dstCoords)
 	dstY = destnationCoords[0] - '0';
 	dstX = destnationCoords[1] - '0';
 	//checking if its eating
-	if (abs(srcX - dstX) == 1)
+	if (abs(srcX - dstX) == 1 && abs(srcY - dstY) == 1)
 	{
 		eaten = eat(board, destnationCoords);
 		board.board[dstY][dstX] = board.board[srcY][srcX];
@@ -37,7 +38,6 @@ void Pawn::move(Board& board, const std::string dstCoords)
 			delete eaten;
 			throw(4); //check expn
 		}
-		setFirstTurn(false);
 	}
 	board.board[dstY][dstX] = board.board[srcY][srcX];
 	board.board[srcY][srcX] = nullptr;
@@ -53,16 +53,15 @@ bool Pawn::legalMovement(const Board& board, const std::string& dstCoords) const
 	int sumX = (numSrc[1] - ASC_NUM_TO_NUM) - (numDst[1] - ASC_NUM_TO_NUM);
 
 	//checking legal movement including checking if the pawn wants to eat(and if its possible)
-	
-	if (sumX != 0 || abs(sumY) > 2 || (!_isFirstTurn && abs(sumY) != 1) || (_isFirstTurn && sumY > 2)) 
-		return false;
-
 	if (abs(sumX) == 1 && abs(sumY) == 1)
 	{
 		if (board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
 			return false;
+		return true;
 	}
-		
+	if (sumX != 0 || (_isFirstTurn==false && abs(sumY) > 1) || (_isFirstTurn && sumY > 2))
+		return false;
+	
 	return true;
 }
 

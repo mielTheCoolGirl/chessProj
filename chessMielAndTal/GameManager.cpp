@@ -98,7 +98,7 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 	{
 		throw int(2); //no player's piece in tile
 	}
-	else if (b.board[dstY][dstX] != nullptr && b.board[dstY][dstX]->getColor() != this->_currentPlayer)
+	else if (b.board[dstY][dstX] != nullptr && b.board[dstY][dstX]->getColor() == this->_currentPlayer)
 	{
 		throw int(3); //same color piece in dst
 	}
