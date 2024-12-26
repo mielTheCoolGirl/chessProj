@@ -1,8 +1,8 @@
 #include "GameManager.h"
 #include "Board.h"
 
-#define BLACK_CHECKS 2 
-#define WHITE_CHECKS 1
+#define NO_CHECKS 0
+#define CHECKS 1
 #define MAX_LEN 65
 
 using std::cout;
@@ -52,9 +52,9 @@ int GameManager::mainGame(std::string inputCoords)
 		_currentPlayer = !_currentPlayer;
 		if (b.checkDanger(b.findKing(_currentPlayer)))
 		{
-			resultOutput = 1;
+			return CHECKS;
 		}
-		resultOutput = 0;
+		return NO_CHECKS;
 			
 		
 	}

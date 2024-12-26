@@ -215,14 +215,6 @@ bool Board::knightCheck(const Piece* king, const int kingX, const int kingY)
 			{
 				if (board[posY][posX]->getColor() != king->getColor() && tolower(board[posY][posX]->getType()) == 'n')
 				{
-					/*if (board[posY][posX]->getColor())
-					{
-						_isChecking = WHITE_CHECKS;
-					}
-					else
-					{
-						_isChecking = BLACK_CHECKS;
-					}*/
 					return true;
 				}
 			}
@@ -240,8 +232,10 @@ bool Board::diagonalCheck(const Piece* king, const int kingX, const int kingY)
 	{
 		if (board[j][i] != nullptr)
 		{
-			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
+			if (board[j][i]->getColor() != king->getColor() && (tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q'))
 			{
+				std::cout << board[j][i]->getColor();
+				std::cout << king->getColor();
 				return true;
 			}
 			else //if its a piece that doesnt threaten the king(diagonally)
@@ -256,7 +250,7 @@ bool Board::diagonalCheck(const Piece* king, const int kingX, const int kingY)
 	{
 		if (board[j][i] != nullptr)
 		{
-			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
+			if (board[j][i]->getColor() != king->getColor() && (tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q'))
 			{
 				return true;
 			}
@@ -273,7 +267,7 @@ bool Board::diagonalCheck(const Piece* king, const int kingX, const int kingY)
 	{
 		if (board[j][i] != nullptr)
 		{
-			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
+			if (board[j][i]->getColor() != king->getColor() && (tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q'))
 			{
 				return true;
 			}
@@ -289,7 +283,7 @@ bool Board::diagonalCheck(const Piece* king, const int kingX, const int kingY)
 	{
 		if (board[j][i] != nullptr)
 		{
-			if (board[j][i]->getColor() != king->getColor() && tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q')
+			if (board[j][i]->getColor() != king->getColor() && (tolower(board[j][i]->getType()) == 'b' || tolower(board[j][i]->getType()) == 'q'))
 			{
 				return true;
 			}
