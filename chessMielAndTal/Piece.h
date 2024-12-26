@@ -18,7 +18,7 @@ public:
 
 	Piece* eat(Board & b, const std::string & targetCoords);
 	//checks legal movement on board
-	virtual bool legalMovement(const std::string& dstCoords) const = 0;
+	virtual bool legalMovement(const Board& board, const std::string& dstCoords) const = 0;
 
 	//moves on board
 	virtual void move(Board& board, const std::string dstCoords) =0;

@@ -8,5 +8,5 @@ public:
 	~King();
 
 	void move(Board& board, const std::string dstCoords) override;
-	bool legalMovement(const std::string& dstCoords)const override;
+	bool legalMovement(const Board& board, const std::string& dstCoords)const override;
 };

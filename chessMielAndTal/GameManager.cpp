@@ -32,9 +32,9 @@ const char* GameManager::mainGame(std::string inputCoords)
 	std::string a = "";
 	std::string coords = inputCoords;
 	std::string originalPlace = Piece::lettersToCoords(inputCoords.substr(0,2));
-	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1";
+	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
 
-	//cout << "Enter board build: "; //rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1
+	//cout << "Enter board build: "; //rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0
 	//std::getline(std::cin, build);
 	//if (build.length() > MAX_LEN)
 	//{
@@ -123,7 +123,7 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 	{
 		throw int(3); //same color piece in dst
 	}
-	else if (b.board[srcY][srcX]->legalMovement(coords.substr(2,4)) == false)
+	else if (b.board[srcY][srcX]->legalMovement(b,coords.substr(2,4)) == false)
 	{
 		throw int(6); //not legal move of piece
 	}

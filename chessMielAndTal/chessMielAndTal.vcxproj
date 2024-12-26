@@ -148,6 +148,7 @@
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="LinearMovement.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Source.cpp" />

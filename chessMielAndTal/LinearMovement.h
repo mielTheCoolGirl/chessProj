@@ -9,6 +9,6 @@ public:
 	~LinearMovement();
 	void move(Board& b,const std::string dstCoords) override;
 
-	virtual bool legalMovement(const std::string& dstCoords)const=0;
+	virtual bool legalMovement(const Board& board, const std::string& dstCoords)const=0;
 
 };

@@ -10,5 +10,5 @@ public:
 	~Pawn();
 
 	void move(Board& board, const std::string dstCoords) override;
-	bool legalMovement(Board& board,const std::string& dstCoords)const;
+	bool legalMovement(const Board& board, const std::string& dstCoords)const override;
 };

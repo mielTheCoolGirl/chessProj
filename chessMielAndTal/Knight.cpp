@@ -8,7 +8,7 @@ Knight::~Knight()
 {
 }
 
-bool Knight::legalMovement(const std::string& dstCoords) const
+bool Knight::legalMovement(const Board& board, const std::string& dstCoords) const
 {
 	int knightMoveOptions[8][2] = { {-1,-2},{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2} };
 	std::string originCoords = lettersToCoords(_currentCoords);

@@ -39,7 +39,7 @@ void King::move(Board& b, std::string dstCoords)
 
 }
 
-bool King::legalMovement(const std::string& dstCoords) const
+bool King::legalMovement(const Board& board, const std::string& dstCoords) const
 {
 	int x1, x2, y1, y2;
 	std::string coordsCalc = lettersToCoords(dstCoords);

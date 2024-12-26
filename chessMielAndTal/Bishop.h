@@ -6,6 +6,6 @@ class Bishop : public LinearMovement
 public:
 	Bishop(const char& bishopType, const std::string& coords);
 	~Bishop();
-	bool legalMovement(const std::string& dstCoords)const override;
+	bool legalMovement(const Board& board, const std::string& dstCoords)const override;
 };
 

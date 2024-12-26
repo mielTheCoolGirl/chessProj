@@ -2,6 +2,7 @@
 #define BOARD_LEN 8
 #include <iostream>
 #include "Piece.h"
+
 #define WHITE 1
 #define BLACK 0
 class Piece;

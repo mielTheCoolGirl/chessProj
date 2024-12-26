@@ -9,7 +9,7 @@ Bishop::~Bishop()
 {
 }
 
-bool Bishop::legalMovement(const std::string& dstCoords) const
+bool Bishop::legalMovement(const Board& board, const std::string& dstCoords) const
 {
 	int x1, x2, y1, y2, slope;
 	std::string coordsCalc = lettersToCoords(dstCoords);

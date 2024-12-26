@@ -42,19 +42,19 @@ void Pawn::move(Board& board, const std::string dstCoords)
 	board.board[srcY][srcX] = nullptr;
 }
 
-bool Pawn::legalMovement(Board& board, const std::string& dstCoords) const
+
+bool Pawn::legalMovement(const Board& board, const std::string& dstCoords) const
 {
-	int sumX, sumY;
 	std::string numDst, numSrc;
 	numDst = lettersToCoords(dstCoords);
 	numSrc = lettersToCoords(_currentCoords);
-	int SumY = (numSrc[0] - ASC_NUM_TO_NUM) - (numDst[0] - ASC_NUM_TO_NUM);
-	int SumX = (numSrc[1] - ASC_NUM_TO_NUM) - (numDst[1] - ASC_NUM_TO_NUM);
+	int sumY = (numSrc[0] - ASC_NUM_TO_NUM) - (numDst[0] - ASC_NUM_TO_NUM);
+	int sumX = (numSrc[1] - ASC_NUM_TO_NUM) - (numDst[1] - ASC_NUM_TO_NUM);
 
 	//checking legal movement including checking if the pawn wants to eat(and if its possible)
 	
-	if (sumX != 0 ||SumY < 1 ||(_isFirstTurn && SumY>2) || (!_isFirstTurn && SumY!=1)||
-		!((board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM])!=nullptr && abs(sumX==1) &&SumY==1))
+	if (sumX != 0 ||sumY < 1 ||(_isFirstTurn && sumY>2) || (!_isFirstTurn && sumY!=1)||
+		!((board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM])!=nullptr && abs(sumX==1) &&sumY==1))
 		return false;
 	return true;
 }
