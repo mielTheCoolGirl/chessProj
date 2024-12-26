@@ -61,7 +61,7 @@ int GameManager::mainGame(std::string inputCoords)
 
 	catch (int e)
 	{
-		resultOutput = e;
+		return e;
 	}
 	return resultOutput;
 	

@@ -62,13 +62,7 @@ void main()
 		int res = g.mainGame(msgFromGraphics);
 		msgToGraphics[0] = (char)(res + '0');
 		msgToGraphics[1] = 0;
-		///******* JUST FOR EREZ DEBUGGING ******/
-		//int r = rand() % 10; // just for debugging......
-		//msgToGraphics[0] = (char)(1 + '0');
-		//msgToGraphics[1] = 0;
-		///******* JUST FOR EREZ DEBUGGING ******/
-
-
+		
 		// return result to graphics		
 		p.sendMessageToGraphics(msgToGraphics);   
 

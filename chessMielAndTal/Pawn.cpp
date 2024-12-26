@@ -54,9 +54,15 @@ bool Pawn::legalMovement(const Board& board, const std::string& dstCoords) const
 
 	//checking legal movement including checking if the pawn wants to eat(and if its possible)
 	
-	if (sumX != 0 ||sumY < 1 ||(_isFirstTurn && sumY>2) || (!_isFirstTurn && sumY!=1)||
-		!((board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM])!=nullptr && abs(sumX==1) &&sumY==1))
+	if (sumX != 0 || abs(sumY) > 2 || (!_isFirstTurn && abs(sumY) != 1) || (_isFirstTurn && sumY > 2)) 
 		return false;
+
+	if (abs(sumX) == 1 && abs(sumY) == 1)
+	{
+		if (board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
+			return false;
+	}
+		
 	return true;
 }
 
