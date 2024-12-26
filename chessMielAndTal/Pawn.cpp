@@ -42,6 +42,11 @@ void Pawn::move(Board& board, const std::string dstCoords)
 	}
 	else
 	{
+		if (board.board[dstY][dstX] != nullptr)
+		{
+			//throwing it under code 6 since pawns cant eat like rooks/queens
+			throw(6);
+		}
 		board.board[dstY][dstX] = board.board[srcY][srcX];
 		board.board[srcY][srcX] = nullptr;
 		board.board[dstY][dstX]->setCurrentCoords(dstCoords);

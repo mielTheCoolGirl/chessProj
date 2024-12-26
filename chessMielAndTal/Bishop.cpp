@@ -18,7 +18,8 @@ bool Bishop::legalMovement(const Board& board, const std::string& dstCoords) con
 	x1 = firstCoords[1] - ASC_NUM_TO_NUM;
 	y2 = coordsCalc[0] - ASC_NUM_TO_NUM;
 	x2 = coordsCalc[1] - ASC_NUM_TO_NUM;
-
+	if ((y2 - y1) == 0)
+		return false;
 	slope = (x2 - x1) / (y2 - y1);
 	if (abs(slope) != 1)
 	{
