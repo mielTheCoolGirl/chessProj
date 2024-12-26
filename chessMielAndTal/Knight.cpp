@@ -15,8 +15,9 @@ bool Knight::legalMovement(const Board& board, const std::string& dstCoords) con
 	std::string destnationCoords = lettersToCoords(dstCoords);
 	int ySum = (originCoords[0] - ASC_NUM_TO_NUM) - (destnationCoords[0] - ASC_NUM_TO_NUM);
 	int xSum = (originCoords[1] - ASC_NUM_TO_NUM) - (destnationCoords[1] - ASC_NUM_TO_NUM);
-	if ((abs(xSum)==1||abs(xSum)==2) && (abs(ySum) == 1 || abs(ySum) == 2))
+	for (int i=0;i<BOARD_LEN;i++)
 	{
+		if (xSum == knightMoveOptions[i][0] && ySum == knightMoveOptions[i][1])
 			return true;
 	}
 	return false;
