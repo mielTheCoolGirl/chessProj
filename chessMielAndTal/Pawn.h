@@ -11,4 +11,7 @@ public:
 
 	void move(Board& board, const std::string dstCoords) override;
 	bool legalMovement(const Board& board, const std::string& dstCoords)const override;
+
+	bool getFirstTurn()const;
+	void setFirstTurn(const bool state);
 };

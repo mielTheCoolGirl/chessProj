@@ -2,6 +2,7 @@
 #include "Rook.h"
 #include "Bishop.h"
 #include "King.h"
+#include "Knight.h"
 #include "Pawn.h"
 #define LOWER_LET_TO_NUM 97
 #define ASC_NUM_TO_NUM '0'
@@ -33,6 +34,10 @@ Board::Board(const std::string& build)
 				break;
 			case 'p':
 				board[i][j] = new Pawn(build[index], src,true);
+				break;
+
+			case 'n':
+				board[i][j] = new Knight(build[index], src);
 				break;
 			default:
 				board[i][j] = nullptr;

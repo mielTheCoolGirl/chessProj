@@ -37,6 +37,7 @@ void Pawn::move(Board& board, const std::string dstCoords)
 			delete eaten;
 			throw(4); //check expn
 		}
+		setFirstTurn(false);
 	}
 	board.board[dstY][dstX] = board.board[srcY][srcX];
 	board.board[srcY][srcX] = nullptr;
@@ -57,4 +58,14 @@ bool Pawn::legalMovement(const Board& board, const std::string& dstCoords) const
 		!((board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM])!=nullptr && abs(sumX==1) &&sumY==1))
 		return false;
 	return true;
+}
+
+bool Pawn::getFirstTurn() const
+{
+	return _isFirstTurn;
+}
+
+void Pawn::setFirstTurn(const bool state)
+{
+	_isFirstTurn = state;
 }
