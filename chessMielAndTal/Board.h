@@ -10,11 +10,11 @@ class Board
 {
 private:
 	//function checks the rook/queen department
-	bool checkHorizonAndVert(Piece* king, int kingX, int kingY);
-	bool pawnCheck(Piece* king, int kingX, int kingY);
-	bool knightCheck(Piece* king, int kingX, int kingY);
-	bool diagonalCheck(Piece* king, int kingX, int kingY);
-	bool kingDanger(Piece* king, int kingX, int kingY);
+	bool checkHorizonAndVert(const Piece* king, const int kingX, const int kingY);
+	bool pawnCheck(const Piece* king,const int kingX,const int kingY);
+	bool knightCheck(const Piece* king,const int kingX,const int kingY);
+	bool diagonalCheck(const Piece* king, const int kingX, const int kingY);
+	bool kingDanger(const Piece* king, const int kingX, const int kingY);
 	
 public:
 	Piece* board[BOARD_LEN][BOARD_LEN];
@@ -25,7 +25,7 @@ public:
 	static bool isInBounds(int x, int y);
 	Piece* findKing(const bool& color);
 	//checks danger for a king, returns true or false(checks for current king peice)
-	bool checkDanger(Piece* king);
+	bool checkDanger(const Piece* king);
 	
 
 	
