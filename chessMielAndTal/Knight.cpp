@@ -10,18 +10,19 @@ Knight::~Knight()
 
 bool Knight::legalMovement(const std::string& dstCoords) const
 {
+	int knightMoveOptions[8][2] = { {-1,-2},{2,1},{2,-1},{-2,1},{-2,-1},{1,2},{1,-2},{-1,2} };
 	std::string originCoords = lettersToCoords(_currentCoords);
 	std::string destnationCoords = lettersToCoords(dstCoords);
 	int ySum = (originCoords[0] - ASC_NUM_TO_NUM) - (destnationCoords[0] - ASC_NUM_TO_NUM);
 	int xSum = (originCoords[1] - ASC_NUM_TO_NUM) - (destnationCoords[1] - ASC_NUM_TO_NUM);
-	if (abs(ySum)!=2 && abs(ySum) != 1 && abs(xSum) != 2 && abs(xSum) != 1)
+	if ((abs(xSum)==1||abs(xSum)==2) && (abs(ySum) == 1 || abs(ySum) == 2))
 	{
-		return true;
+			return true;
 	}
 	return false;
 }
 
-void Knight::move(Board& board, std::string dstCoords)
+void Knight::move(Board& board, const std::string dstCoords)
 { 
 	int srcX, srcY, dstX, dstY;
 	Piece* eaten = nullptr; 

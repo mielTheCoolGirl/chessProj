@@ -7,7 +7,7 @@ class LinearMovement: public Piece
 public:
 	LinearMovement(char linearPieceType, std::string coords);
 	~LinearMovement();
-	void move(Board& b, std::string dstCoords) override;
+	void move(Board& b,const std::string dstCoords) override;
 
 	virtual bool legalMovement(const std::string& dstCoords)const=0;
 

@@ -8,7 +8,7 @@ LinearMovement::LinearMovement(char linearPieceType, std::string coords) :  Piec
 LinearMovement::~LinearMovement()
 {
 }
-void LinearMovement::move(Board& b, std::string dstCoords)
+void LinearMovement::move(Board& b,const std::string dstCoords)
 { 
 	//The function is checked assuming that there isnt same color piece in target slot 
 	std::string numSrc = lettersToCoords(this->_currentCoords);
