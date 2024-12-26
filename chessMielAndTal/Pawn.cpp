@@ -17,10 +17,11 @@ void Pawn::move(Board& board, const std::string dstCoords)
 	std::string originCoords = lettersToCoords(_currentCoords);
 	std::string destnationCoords = lettersToCoords(dstCoords);
 	std::string prevCoords = _currentCoords;
-	srcY = originCoords[0] - '0';
-	srcX = originCoords[1] - '0';
-	dstY = destnationCoords[0] - '0';
-	dstX = destnationCoords[1] - '0';
+	srcY = originCoords[0] - ASC_NUM_TO_NUM;
+	srcX = originCoords[1] - ASC_NUM_TO_NUM;
+	dstY = destnationCoords[0] - ASC_NUM_TO_NUM;
+	dstX = destnationCoords[1] - ASC_NUM_TO_NUM;
+	
 	//checking if its eating
 	if (abs(srcX - dstX) == 1 && abs(srcY - dstY) == 1)
 	{
@@ -39,8 +40,13 @@ void Pawn::move(Board& board, const std::string dstCoords)
 			throw(4); //check expn
 		}
 	}
-	board.board[dstY][dstX] = board.board[srcY][srcX];
-	board.board[srcY][srcX] = nullptr;
+	else
+	{
+		board.board[dstY][dstX] = board.board[srcY][srcX];
+		board.board[srcY][srcX] = nullptr;
+		board.board[dstY][dstX]->setCurrentCoords(dstCoords);
+	}
+	
 }
 
 
@@ -49,17 +55,17 @@ bool Pawn::legalMovement(const Board& board, const std::string& dstCoords) const
 	std::string numDst, numSrc;
 	numDst = lettersToCoords(dstCoords);
 	numSrc = lettersToCoords(_currentCoords);
-	int sumY = (numSrc[0] - ASC_NUM_TO_NUM) - (numDst[0] - ASC_NUM_TO_NUM);
-	int sumX = (numSrc[1] - ASC_NUM_TO_NUM) - (numDst[1] - ASC_NUM_TO_NUM);
-
+	int subY = (numSrc[0] - ASC_NUM_TO_NUM) - (numDst[0] - ASC_NUM_TO_NUM);
+	int subX = (numSrc[1] - ASC_NUM_TO_NUM) - (numDst[1] - ASC_NUM_TO_NUM);
+	
 	//checking legal movement including checking if the pawn wants to eat(and if its possible)
-	if (abs(sumX) == 1 && abs(sumY) == 1)
+	if (abs(subX) ==1 && abs(subY)==1)
 	{
 		if (board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
 			return false;
 		return true;
 	}
-	if (sumX != 0 || (_isFirstTurn==false && abs(sumY) > 1) || (_isFirstTurn && sumY > 2))
+	if (subX != 0 || (_isFirstTurn==false && abs(subY) > 1) || (_isFirstTurn && abs(subY) > 2))
 		return false;
 	
 	return true;

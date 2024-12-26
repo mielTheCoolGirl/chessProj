@@ -50,7 +50,7 @@ int GameManager::mainGame(std::string inputCoords)
 		turnExpn(coords, b);
 		b.board[srcY][srcX]->move(b, coords.substr(2, 4));
 		_currentPlayer = !_currentPlayer;
-		if (b.checkDanger(b.findKing(!_currentPlayer)))
+		if (b.checkDanger(b.findKing(_currentPlayer)))
 		{
 			resultOutput = 1;
 		}

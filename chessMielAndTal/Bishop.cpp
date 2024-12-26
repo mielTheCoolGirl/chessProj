@@ -14,13 +14,13 @@ bool Bishop::legalMovement(const Board& board, const std::string& dstCoords) con
 	int x1, x2, y1, y2, slope;
 	std::string coordsCalc = lettersToCoords(dstCoords);
 	std::string firstCoords = lettersToCoords(_currentCoords);
-	y1 = firstCoords[0] - '0';
-	x1 = firstCoords[1] - '0';
-	y2 = coordsCalc[0] - '0';
-	x2 = coordsCalc[1] - '0';
+	y1 = firstCoords[0] - ASC_NUM_TO_NUM;
+	x1 = firstCoords[1] - ASC_NUM_TO_NUM;
+	y2 = coordsCalc[0] - ASC_NUM_TO_NUM;
+	x2 = coordsCalc[1] - ASC_NUM_TO_NUM;
 
 	slope = (x2 - x1) / (y2 - y1);
-	if (slope != 1)
+	if (abs(slope) != 1)
 	{
 		return false;
 	}
