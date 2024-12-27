@@ -42,7 +42,6 @@ int GameManager::mainGame(std::string inputCoords)
 {
 	std::string coords = inputCoords;
 	std::string originalPlace = Piece::lettersToCoords(inputCoords.substr(0, 2));
-	int resultOutput;
 	try
 	{
 
@@ -52,6 +51,7 @@ int GameManager::mainGame(std::string inputCoords)
 		turnExpn(coords, b);
 		b.board[srcY][srcX]->move(b, coords.substr(2, 4));
 		_currentPlayer = !_currentPlayer;
+		b.printBoard();
 		if (b.checkDanger(b.findKing(_currentPlayer)))
 		{
 			return CHECKS;
@@ -65,7 +65,7 @@ int GameManager::mainGame(std::string inputCoords)
 	{
 		return e;
 	}
-	return resultOutput;
+	
 
 }
 	

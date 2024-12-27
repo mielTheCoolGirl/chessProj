@@ -3,6 +3,8 @@
 class Rook;
 #include "King.h"
 class King;
+
+#define ASC_NUM_TO_NUM '0'
 Piece::Piece(const char& type, const std::string& currentCoords): 
     _type(type), _currentCoords(currentCoords)
 {
@@ -22,27 +24,20 @@ Piece::~Piece()
 
 Piece* Piece::eat(Board& b, const std::string& targetCoords)
 {
-    Piece* p = b.board[int(targetCoords[0] - ASC_NUM_TO_NUM)][int(targetCoords[1] - ASC_NUM_TO_NUM)];
-    if (p == nullptr)
-    {
-        return nullptr;
-    }
-
-    switch (tolower(p->getType()))
-    {
-    case 'r':
-        return new Rook(p->_type, p->_currentCoords);
-    default:
-        return nullptr;
-    }
+    Piece* p = b.board[int(targetCoords[0] - '0')][int(targetCoords[1] - '0')];
+    return p;
 }
 
 
-std::string Piece::lettersToCoords(std::string coords) //a2 [6][0]
+std::string Piece::lettersToCoords(std::string letters) //a2 [6][0]
 {
-    int letterToNum = coords[0] - LOWER_LET_TO_NUM;
-    int yAxis = BOARD_LEN - (coords[1] - ASC_NUM_TO_NUM);
-    return  std::to_string(yAxis) + std::to_string(letterToNum);
+    std::string coords = "";
+    int letterToNum = letters[0] - LOWER_LET_TO_NUM;
+    int yAxis = BOARD_LEN - (letters[1] - ASC_NUM_TO_NUM);
+    coords = std::to_string(yAxis);
+    coords += std::to_string(letterToNum);
+    //return  std::to_string(yAxis) + std::to_string(letterToNum);
+    return coords;
 }
 
 

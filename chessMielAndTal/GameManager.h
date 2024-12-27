@@ -1,8 +1,9 @@
 #pragma once
 #include "Board.h"
 
+//"####p#######################k######P###################P#####K##0"
 //"rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"
-#define BUILD "############################k######P############################0"
+#define BUILD "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0"
 class GameManager
 {
 private:
