@@ -91,15 +91,15 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 	}
 	else if (b.board[srcY][srcX] == nullptr || b.board[srcY][srcX]->getColor() != this->_currentPlayer)
 	{
-		throw int(2); //no player's piece in tile
+		throw(2); //no player's piece in tile
 	}
 	else if (b.board[dstY][dstX] != nullptr && b.board[dstY][dstX]->getColor() == this->_currentPlayer)
 	{
-		throw int(3); //same color piece in dst
+		throw(3); //same color piece in dst
 	}
 	else if (b.board[srcY][srcX]->legalMovement(b,coords.substr(2,4)) == false)
 	{
-		throw int(6); //not legal move of piece
+		throw(6); //not legal move of piece
 	}
 
 
