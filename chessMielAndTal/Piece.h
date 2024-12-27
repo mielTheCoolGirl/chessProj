@@ -15,7 +15,7 @@ protected:
 public:
 	Piece(const char& type, const std::string& currentCoords);
 	virtual ~Piece();
-
+	//returns the eaten piece
 	Piece* eat(Board & b, const std::string & targetCoords);
 	//checks legal movement on board
 	virtual bool legalMovement(const Board& board, const std::string& dstCoords) const = 0;

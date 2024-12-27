@@ -14,6 +14,5 @@ public:
 	bool turnExpn(const std::string& coords, const Board& b);
 	bool getCurrentPlayer()const;
 	void setCurrentPlayer(bool current);
-	void switchPlayer();
 	int mainGame(std::string inputCoords);
 };
