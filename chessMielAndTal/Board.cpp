@@ -181,16 +181,16 @@ bool Board::pawnCheck(const Piece* king, const int kingX, const int kingY)
 {					
 	if (king->getColor() == WHITE)
 	{
-		if ((isInBounds(kingX + 1, kingY + 1) && board[kingY + 1][kingX + 1] != nullptr && board[kingY + 1][kingX + 1]->getType() == 'p') ||
-			(isInBounds(kingX + 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'p'))
+		if ((isInBounds(kingX - 1, kingY + 1) && board[kingY + 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'p') ||
+			(isInBounds(kingX - 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'p'))
 		{
 			return true;
 		}
 	}
 	else //black color
 	{
-		if ((isInBounds(kingX - 1, kingY - 1) && board[kingY - 1][kingX - 1] != nullptr && board[kingY - 1][kingX - 1]->getType() == 'P') ||
-			(isInBounds(kingX + 1, kingY - 1) && board[kingY - 1][kingX + 1] != nullptr && board[kingY - 1][kingX + 1]->getType() == 'P'))
+		if ((isInBounds(kingX - 1, kingY - 1) && board[kingY + 1][kingX - 1] != nullptr && board[kingY + 1][kingX - 1]->getType() == 'P') ||
+			(isInBounds(kingX + 1, kingY - 1) && board[kingY + 1][kingX + 1] != nullptr && board[kingY + 1][kingX + 1]->getType() == 'P'))
 		{
 			return true;
 		}
