@@ -21,7 +21,7 @@ void Pawn::move(Board& board, const std::string dstCoords)
 	srcX = originCoords[1] - ASC_NUM_TO_NUM;
 	dstY = destnationCoords[0] - ASC_NUM_TO_NUM;
 	dstX = destnationCoords[1] - ASC_NUM_TO_NUM;
-	
+	king = board.findKing(board.board[srcY][srcX]->getColor());
 	//checking if its eating
 	if (abs(srcX - dstX) == 1 && abs(srcY - dstY) == 1)
 	{
@@ -29,7 +29,6 @@ void Pawn::move(Board& board, const std::string dstCoords)
 		board.board[dstY][dstX] = board.board[srcY][srcX];
 		board.board[srcY][srcX] = nullptr;
 		board.board[dstY][dstX]->setCurrentCoords(dstCoords);
-		king = board.findKing(board.board[dstY][dstX]->getColor());
 		//if the king of the current color is checked after movement
 		if (board.checkDanger(king))
 		{
@@ -50,6 +49,15 @@ void Pawn::move(Board& board, const std::string dstCoords)
 		board.board[dstY][dstX] = board.board[srcY][srcX];
 		board.board[srcY][srcX] = nullptr;
 		board.board[dstY][dstX]->setCurrentCoords(dstCoords);
+		//if the king of the current color is checked after movement
+		if (board.checkDanger(king))
+		{
+			board.board[dstY][dstX]->setCurrentCoords(prevCoords);
+			board.board[srcY][srcX] = board.board[dstY][dstX];
+			board.board[dstY][dstX] = nullptr;
+			throw(4); //check expn
+		}
+		
 	}
 	
 }
