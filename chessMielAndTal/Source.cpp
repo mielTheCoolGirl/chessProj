@@ -46,7 +46,7 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1");
+	strcpy_s(msgToGraphics, BUILD);
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 

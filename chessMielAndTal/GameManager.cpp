@@ -5,6 +5,7 @@
 #define CHECKS 1
 #define MAX_LEN 65
 
+
 using std::cout;
 using std::cin;
 using std::endl;
@@ -13,9 +14,10 @@ bool GameManager::getCurrentPlayer() const
 {
 	return _currentPlayer;
 }
-GameManager::GameManager():b("rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0")
+//rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1
+GameManager::GameManager():b(BUILD)
 {
-	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
+	std::string build = BUILD;
 	_currentPlayer = build[MAX_LEN - 1] - ASC_NUM_TO_NUM;
 
 	build.pop_back();

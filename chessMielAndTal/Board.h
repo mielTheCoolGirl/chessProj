@@ -3,8 +3,8 @@
 #include <iostream>
 #include "Piece.h"
 
-#define WHITE 1
-#define BLACK 0
+#define WHITE 0
+#define BLACK 1
 class Piece;
 
 class Board

@@ -1,6 +1,9 @@
 #pragma once
 #include "Piece.h"
 
+#define BLACK 1
+#define WHITE 0
+
 class Pawn :public Piece
 {
 private:
