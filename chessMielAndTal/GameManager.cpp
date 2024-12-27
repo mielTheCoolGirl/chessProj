@@ -27,10 +27,11 @@ void GameManager::switchPlayer()
 		_currentPlayer = false;
 }
 
-void GameManager::mainGame()
+const char* GameManager::mainGame(std::string inputCoords)
 {
 	std::string a = "";
-	std::string coords = "a7a5";
+	std::string coords = inputCoords;
+	std::string originalPlace = Piece::lettersToCoords(inputCoords.substr(0,2));
 	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1";
 
 	//cout << "Enter board build: "; //rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1
@@ -44,60 +45,62 @@ void GameManager::mainGame()
 	build.pop_back();
 	Board b(build);
 	b.printBoard();
+	b.board[originalPlace[0]-ASC_NUM_TO_NUM][originalPlace[1]- ASC_NUM_TO_NUM]->move(b, inputCoords.substr(2, 4));
 
-	while (coords != "exit")
+	try
 	{
-		try
+		switch (_currentPlayer)
 		{
-			switch (_currentPlayer)
-			{
-			case WHITE:
-				cout << "Current Player: white" << endl;
-				break;
-			default:
-				cout << "Current Player: black" << endl;
-			}
-			
-			cout << "Enter Move: ";
-			std::cin >> coords;
-			int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = BOARD_LEN - (coords[1] - ASC_NUM_TO_NUM);
-			int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = BOARD_LEN - (coords[3] - ASC_NUM_TO_NUM);
-			turnExpn(coords, b);
-			b.board[srcY][srcX]->move(b, coords.substr(2, 4));
-
-			if (b.checkDanger(b.findKing(!_currentPlayer)))
-			{
-				cout << "Youv'e made a check!" << endl;
-			}
-			
-			_currentPlayer = !_currentPlayer;
+		case WHITE:
+			cout << "Current Player: white" << endl;
+			break;
+		default:
+			cout << "Current Player: black" << endl;
 		}
+		
+		cout << "Enter Move: ";
+		std::cin >> coords;
+		int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = BOARD_LEN - (coords[1] - ASC_NUM_TO_NUM);
+		int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = BOARD_LEN - (coords[3] - ASC_NUM_TO_NUM);
+		turnExpn(coords, b);
+		b.board[srcY][srcX]->move(b, coords.substr(2, 4));
 
-		catch (int e)
+		if (b.checkDanger(b.findKing(!_currentPlayer)))
 		{
-			
-			if (e == 7)
-			{
-				std::cout << "src and dst are the same" << std::endl;
-			}
-			else if (e == 4)
-			{
-				std::cout << "Error: check will occur on you king with this move" << std::endl;
-			}
-			else
-			{
-				cout << "Error. Code: " << e << endl;
-			}
-
+			cout << "Youv'e made a check!" << endl;
 		}
-		b.printBoard();
+			
+		_currentPlayer = !_currentPlayer;
 	}
-	
-	
-	
-}
+	catch (int e)
+	{
+		switch(e)
+		{
+		case 7:
+		{
+			return "src and dst are the same";
+		}
+		case 4:
+		{
+			return "Error: check will occur on you king with this move";
+		}
+		default:
+		{
+			return "Error. Code: "+e;
+		}
+		}
 
-bool GameManager::turnExpn(const std::string& coords, const Board& b)
+
+	}
+	b.printBoard();
+	return "sos";
+}
+	
+	
+	
+
+
+void GameManager::turnExpn(const std::string& coords, const Board& b)
 {
 	std::string numSrc = "";
 	std::string numDst = "";

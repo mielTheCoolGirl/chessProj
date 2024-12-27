@@ -26,7 +26,7 @@ Board::Board(const std::string& build)
 				board[i][j] = new King(build[index], src);
 				break;
 			case 'r':
-				board[i][j] = new Rook(build[index], src);
+				board[i][j] = new Bishop(build[index], src);
 				break;
 			default:
 				board[i][j] = nullptr;
@@ -55,18 +55,9 @@ Board::~Board()
 
 void Board::printBoard() const
 {
-	std::string boardRes = "";
-	cout << "  ";
-	for (char xAxis = 'a'; xAxis < 'i'; xAxis++)
-	{
-		std::cout << xAxis << " ";
-	}
-	cout << endl;
 	
-
 	for (int i = 0; i < BOARD_LEN; i++)
 	{
-		std::cout << BOARD_LEN - i << " ";
 		for (int j = 0; j < BOARD_LEN; j++)
 		{
 			if (board[i][j] == nullptr)
