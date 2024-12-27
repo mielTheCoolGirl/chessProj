@@ -1,8 +1,8 @@
 #include "GameManager.h"
 #include "Board.h"
 
-#define BLACK_CHECKS 2 
-#define WHITE_CHECKS 1
+#define NO_CHECKS 0
+#define CHECKS 1
 #define MAX_LEN 65
 
 using std::cout;
@@ -13,7 +13,15 @@ bool GameManager::getCurrentPlayer() const
 {
 	return _currentPlayer;
 }
+GameManager::GameManager():b("rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0")
+{
+	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0";
+	_currentPlayer = build[MAX_LEN - 1] - ASC_NUM_TO_NUM;
 
+	build.pop_back();
+	b.printBoard();
+
+}
 void GameManager::setCurrentPlayer(bool current)
 {
 	_currentPlayer = current;
@@ -27,80 +35,43 @@ void GameManager::switchPlayer()
 		_currentPlayer = false;
 }
 
-const char* GameManager::mainGame(std::string inputCoords)
+
+int GameManager::mainGame(std::string inputCoords)
 {
-	std::string a = "";
 	std::string coords = inputCoords;
-	std::string originalPlace = Piece::lettersToCoords(inputCoords.substr(0,2));
-	std::string build = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1";
-
-	//cout << "Enter board build: "; //rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1
-	//std::getline(std::cin, build);
-	//if (build.length() > MAX_LEN)
-	//{
-	//	build.erase(MAX_LEN);
-	//}
-	_currentPlayer = build[MAX_LEN - 1];
-
-	build.pop_back();
-	Board b(build);
-	b.printBoard();
-	b.board[originalPlace[0]-ASC_NUM_TO_NUM][originalPlace[1]- ASC_NUM_TO_NUM]->move(b, inputCoords.substr(2, 4));
-
+	std::string originalPlace = Piece::lettersToCoords(inputCoords.substr(0, 2));
+	int resultOutput;
 	try
 	{
-		switch (_currentPlayer)
-		{
-		case WHITE:
-			cout << "Current Player: white" << endl;
-			break;
-		default:
-			cout << "Current Player: black" << endl;
-		}
-		
-		cout << "Enter Move: ";
-		std::cin >> coords;
+
+		coords = inputCoords;
 		int srcX = (coords[0] - LOWER_LET_TO_NUM), srcY = BOARD_LEN - (coords[1] - ASC_NUM_TO_NUM);
 		int dstX = (coords[2] - LOWER_LET_TO_NUM), dstY = BOARD_LEN - (coords[3] - ASC_NUM_TO_NUM);
 		turnExpn(coords, b);
 		b.board[srcY][srcX]->move(b, coords.substr(2, 4));
-
-		if (b.checkDanger(b.findKing(!_currentPlayer)))
-		{
-			cout << "Youv'e made a check!" << endl;
-		}
-			
 		_currentPlayer = !_currentPlayer;
+		if (b.checkDanger(b.findKing(_currentPlayer)))
+		{
+			return CHECKS;
+		}
+		return NO_CHECKS;
+
+
 	}
+
 	catch (int e)
 	{
-		switch(e)
-		{
-		case 7:
-		{
-			return "src and dst are the same";
-		}
-		case 4:
-		{
-			return "Error: check will occur on you king with this move";
-		}
-		default:
-		{
-			return "Error. Code: "+e;
-		}
-		}
-
-
+		return e;
 	}
-	b.printBoard();
-	return "sos";
+	return resultOutput;
+
 }
 	
 	
 	
 
 
-void GameManager::turnExpn(const std::string& coords, const Board& b)
+bool GameManager::turnExpn(const std::string& coords, const Board& b)
 {
 	std::string numSrc = "";
 	std::string numDst = "";
@@ -131,7 +102,7 @@ void GameManager::turnExpn(const std::string& coords, const Board& b)
 	{
 		throw int(3); //same color piece in dst
 	}
-	else if (b.board[srcY][srcX]->legalMovement(coords.substr(2,4)) == false)
+	else if (b.board[srcY][srcX]->legalMovement(b,coords.substr(2,4)) == false)
 	{
 		throw int(6); //not legal move of piece
 	}

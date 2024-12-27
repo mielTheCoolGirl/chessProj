@@ -3,7 +3,7 @@
 #include "Board.h"
 #define LOWER_LET_TO_NUM 97
 #define ASC_NUM_TO_NUM '0'
-#define PIECE_IN_WAY_EXPN 9
+#define PIECE_IN_WAY_EXPN 6
 class Board;
 
 class Piece
@@ -18,10 +18,10 @@ public:
 
 	Piece* eat(Board & b, const std::string & targetCoords);
 	//checks legal movement on board
-	virtual bool legalMovement(const std::string& dstCoords) const = 0;
+	virtual bool legalMovement(const Board& board, const std::string& dstCoords) const = 0;
 
 	//moves on board
-	virtual void move(Board& board, std::string dstCoords)=0;
+	virtual void move(Board& board, const std::string dstCoords) =0;
 
 	
 	static std::string lettersToCoords(std::string coords);
