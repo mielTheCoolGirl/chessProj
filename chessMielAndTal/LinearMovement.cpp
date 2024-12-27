@@ -36,7 +36,7 @@ void LinearMovement::move(Board& b,const std::string dstCoords)
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
 	
-	king = b.findKing(b.board[dstY][dstX]->getColor());
+	king = b.findKing(b.board[srcY][srcX]->getColor());
 	b.board[dstY][dstX]->setCurrentCoords(dstCoords); //new coords of piece
 	if (b.checkDanger(king)) //if king is checked
 	{

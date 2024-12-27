@@ -40,7 +40,8 @@ void Knight::move(Board& board, const std::string dstCoords)
 	board.board[dstY][dstX] = board.board[srcY][srcX];
 	board.board[srcY][srcX] = nullptr;
 	board.board[dstY][dstX]->setCurrentCoords(dstCoords);
-	king = board.findKing(board.board[dstY][dstX]->getColor());
+	
+	king = board.findKing(board.board[srcY][srcX]->getColor());
 	//if the king of the current color is checked after movement
 	if (board.checkDanger(king))
 	{
