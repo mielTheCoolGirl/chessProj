@@ -2,8 +2,8 @@
 #include <string>
 #include "Board.h"
 #define LOWER_LET_TO_NUM 97
-#define ASC_NUM_TO_NUM '0'
-#define PIECE_IN_WAY_EXPN 6
+#define ASC_NUM_TO_NUM 48
+
 class Board;
 
 class Piece

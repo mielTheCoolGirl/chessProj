@@ -5,8 +5,6 @@
 #include "Knight.h"
 #include "Queen.h"
 #include "Pawn.h"
-#define LOWER_LET_TO_NUM 97
-#define ASC_NUM_TO_NUM '0'
 
 using std::cout;
 using std::endl;

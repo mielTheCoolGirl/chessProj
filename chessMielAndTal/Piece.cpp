@@ -4,7 +4,6 @@ class Rook;
 #include "King.h"
 class King;
 
-#define ASC_NUM_TO_NUM '0'
 Piece::Piece(const char& type, const std::string& currentCoords): 
     _type(type), _currentCoords(currentCoords)
 {

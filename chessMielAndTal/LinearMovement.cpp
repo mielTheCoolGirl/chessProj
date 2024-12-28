@@ -31,7 +31,7 @@ void LinearMovement::move(Board& b,const std::string dstCoords)
 	while (x != dstX || y != dstY)
 	{
 		if (b.board[y][x] != nullptr)
-			throw (PIECE_IN_WAY_EXPN);
+			throw (6);
 		x += dx;
 		y += dy;
 	}

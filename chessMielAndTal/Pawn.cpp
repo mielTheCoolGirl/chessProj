@@ -1,7 +1,6 @@
 #include "Pawn.h"
 
 
-
 Pawn::Pawn(const char& pawnType, const std::string& coords, bool firstTurn):Piece(pawnType,coords),_isFirstTurn(firstTurn)
 {
 }
@@ -37,17 +36,11 @@ void Pawn::move(Board& board, const std::string dstCoords)
 			board.board[dstY][dstX]->setCurrentCoords(prevCoords);
 			board.board[srcY][srcX] = board.board[dstY][dstX];
 			board.board[dstY][dstX] = eaten;
-			delete eaten;
 			throw(4); //check expn
 		}
 	}
 	else
 	{
-		if (board.board[dstY][dstX] != nullptr)
-		{
-			//throwing it under code 6 since pawns cant eat like rooks/queens
-			throw(6);
-		}
 		board.board[dstY][dstX] = board.board[srcY][srcX];
 		board.board[srcY][srcX] = nullptr;
 		board.board[dstY][dstX]->setCurrentCoords(dstCoords);
@@ -65,28 +58,33 @@ void Pawn::move(Board& board, const std::string dstCoords)
 }
 
 
-bool Pawn::legalMovement(const Board& board, const std::string& dstCoords) const
+bool Pawn::legalMovement(const Board& b, const std::string& dstCoords) const
 {
 	std::string numDst, numSrc;
 	numDst = lettersToCoords(dstCoords);
 	numSrc = lettersToCoords(_currentCoords);
-	int subY = (numSrc[0] - ASC_NUM_TO_NUM) - (numDst[0] - ASC_NUM_TO_NUM);
-	int subX = (numSrc[1] - ASC_NUM_TO_NUM) - (numDst[1] - ASC_NUM_TO_NUM);
-	int direction = this->getColor() ? -1 : 1; //The color of the piece determines its direction
+	int subY = (numDst[0] - ASC_NUM_TO_NUM) - (numSrc[0] - ASC_NUM_TO_NUM);
+	int subX = (numDst[1] - ASC_NUM_TO_NUM) - (numSrc[1] - ASC_NUM_TO_NUM);
+	int direction = this->getColor() ? 1 : -1; //The color of the piece determines its direction
 
-	if (abs(subX) > 1)
-		return false;
-
-	if (!(subY == direction || (subY == 2 * direction && _isFirstTurn)))
+	if (abs(subX) > 1 || !(subY == direction || (subY == 2 * direction && _isFirstTurn)))
 		return false;
 		
 	//checking legal movement including checking if the pawn wants to eat(and if its possible)
 	if (abs(subX) == 1)
 	{
-		if (abs(subY) != 1 || board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
+		if (abs(subY) != 1 || b.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
 			return false;
 	}
-	
+
+	//subX = 0
+	for (int i = direction; i != subY + direction; i += direction)
+	{
+		//if there is piece in way
+		if (b.board[numSrc[0] - ASC_NUM_TO_NUM + i][numSrc[1] - ASC_NUM_TO_NUM] != nullptr)
+			return false;
+	}
+
 	return true;
 }
 
