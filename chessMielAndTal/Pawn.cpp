@@ -75,6 +75,7 @@ bool Pawn::legalMovement(const Board& b, const std::string& dstCoords) const
 	{
 		if (abs(subY) != 1 || b.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
 			return false;
+		return true;
 	}
 
 	//subX = 0
