@@ -83,6 +83,49 @@ void Board::printBoard() const
 	cout << endl;
 }
 
+bool Board::checkmateCheck(const bool& kingColor)
+{
+	Piece* king = findKing(kingColor);
+	std::string coordsKing = Piece::lettersToCoords(king->getCurrentCoords());
+	int kingY = coordsKing[0] - ASC_NUM_TO_NUM;
+	int kingX = coordsKing[1] - ASC_NUM_TO_NUM;
+	char newX, newY;
+	std::string resCoords;
+	Piece* newKing = nullptr;
+	int kingMovs[8][2] = { {1,1},{1,0},{1,-1},{0,1},{0,-1},{-1,-1},{-1,0},{-1,1} };
+	int possibleMovs = 8;
+	if (king == nullptr)
+		return false; 
+	if (checkDanger(king) == false)
+		return false;
+
+	for (int i = 0; i < possibleMovs; i++)
+	{
+		if (isInBounds(kingX + kingMovs[i][1], kingY + kingMovs[i][0]))
+		{
+			if (board[kingY + kingMovs[i][0]][kingX + kingMovs[i][1]]!=nullptr)
+			{
+				newY = char(int(coordsKing[0]) + kingMovs[i][0]);
+				newX = char(int(coordsKing[1]) + kingMovs[i][1]);
+				resCoords = std::string(1, newY) + std::string(1, newX);
+				if (board[kingY + kingMovs[i][0]][kingX + kingMovs[i][1]]->getColor() != kingColor)
+				{
+					newKing = new King(king->getType(), resCoords);
+					if (!checkDanger(newKing)) //if there's at least one safe move for him
+					{
+						delete newKing;
+						return false;
+					}
+				}
+			}
+
+		}
+			
+	}
+	
+	return true;
+}
+
 
 bool Board::checkDanger(const Piece* king)
 {
@@ -321,6 +364,7 @@ Piece* Board::findKing(const bool& color)
 			}
 		}
 	}
+	return nullptr;
 }
 
 

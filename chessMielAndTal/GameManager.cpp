@@ -3,6 +3,7 @@
 
 #define NO_CHECKS 0
 #define CHECKS 1
+#define CHECKMATE 8
 #define MAX_LEN 65
 
 
@@ -47,6 +48,8 @@ int GameManager::mainGame(std::string inputCoords)
 		b.printBoard();
 		if (b.checkDanger(b.findKing(_currentPlayer)))
 		{
+			if (b.checkmateCheck((b.findKing(_currentPlayer)->getColor())))
+				return CHECKMATE;
 			return CHECKS;
 		}
 		return NO_CHECKS;
@@ -101,6 +104,5 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 	{
 		throw(6); //not legal move of piece
 	}
-
-
+	
 }
