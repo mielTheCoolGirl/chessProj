@@ -24,8 +24,8 @@ Piece::~Piece()
 
 Piece* Piece::eat(Board& b, const std::string& targetCoords)
 {
-    Piece* p = b.board[int(targetCoords[0] - '0')][int(targetCoords[1] - '0')];
-    return p;
+    return b.board[int(targetCoords[0] - '0')][int(targetCoords[1] - '0')];
+    
 }
 
 
