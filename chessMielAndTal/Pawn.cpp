@@ -24,7 +24,7 @@ void Pawn::move(Board& board, const std::string dstCoords)
 	dstX = destnationCoords[1] - ASC_NUM_TO_NUM;
 	king = board.findKing(board.board[srcY][srcX]->getColor());
 	//checking if its eating
-	if (abs(srcX - dstX) == 1 && abs(srcY - dstY) == 1)
+	if (abs(srcX - dstX) == 1)
 	{
 		eaten = eat(board, destnationCoords);
 		board.board[dstY][dstX] = board.board[srcY][srcX];
