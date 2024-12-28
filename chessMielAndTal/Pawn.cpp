@@ -72,18 +72,19 @@ bool Pawn::legalMovement(const Board& board, const std::string& dstCoords) const
 	numSrc = lettersToCoords(_currentCoords);
 	int subY = (numSrc[0] - ASC_NUM_TO_NUM) - (numDst[0] - ASC_NUM_TO_NUM);
 	int subX = (numSrc[1] - ASC_NUM_TO_NUM) - (numDst[1] - ASC_NUM_TO_NUM);
-	
-	if ((this->getColor() == true && subY !=-1 &&_isFirstTurn==false)|| (this->getColor() == true && (subY != -2 && subY!=-1) && _isFirstTurn == true))
+	int direction = this->getColor() ? -1 : 1; //The color of the piece determines its direction
+
+	if (abs(subX) > 1)
 		return false;
 
-	if ((this->getColor() == false && subY != 1 && _isFirstTurn == false) || (this->getColor() == false && (subY != 2 && subY != 1) && _isFirstTurn == true))
+	if (!(subY == direction || (subY == 2 * direction && _isFirstTurn)))
 		return false;
+		
 	//checking legal movement including checking if the pawn wants to eat(and if its possible)
-	if (abs(subX) ==1 && abs(subY)==1)
+	if (abs(subX) == 1)
 	{
-		if (board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
+		if (abs(subY) != 1 || board.board[numDst[0] - ASC_NUM_TO_NUM][numDst[1] - ASC_NUM_TO_NUM] == nullptr)
 			return false;
-		return true;
 	}
 	
 	return true;
