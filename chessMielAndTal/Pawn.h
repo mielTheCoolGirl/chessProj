@@ -1,6 +1,6 @@
 #pragma once
 #include "Piece.h"
-
+#include "Queen.h"
 #define BLACK 1
 #define WHITE 0
 

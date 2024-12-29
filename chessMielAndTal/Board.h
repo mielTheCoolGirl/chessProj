@@ -32,4 +32,5 @@ public:
 	//checks danger for a king, returns true or false(checks for current king peice)
 	bool checkDanger(const Piece* king);
 	bool checkmateCheck(const bool& kingColor);
+
 };

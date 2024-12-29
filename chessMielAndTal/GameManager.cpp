@@ -15,7 +15,7 @@ bool GameManager::getCurrentPlayer() const
 {
 	return _currentPlayer;
 }
-//rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1
+
 GameManager::GameManager():b(BUILD)
 {
 	std::string build = BUILD;

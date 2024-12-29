@@ -1,8 +1,7 @@
 #pragma once
 #include "Board.h"
 
-//"####p#######################k######P###################P#####K##0"
-//"rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"
+//defining current build for chessboard
 #define BUILD "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0"
 class GameManager
 {

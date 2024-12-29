@@ -18,10 +18,12 @@ void Pawn::move(Board& board, const std::string dstCoords)
 	std::string originCoords = lettersToCoords(_currentCoords);
 	std::string destnationCoords = lettersToCoords(dstCoords);
 	std::string prevCoords = _currentCoords;
+
 	srcY = originCoords[0] - ASC_NUM_TO_NUM;
 	srcX = originCoords[1] - ASC_NUM_TO_NUM;
 	dstY = destnationCoords[0] - ASC_NUM_TO_NUM;
 	dstX = destnationCoords[1] - ASC_NUM_TO_NUM;
+	
 	king = board.findKing(board.board[srcY][srcX]->getColor());
 	//checking if its eating
 	if (abs(srcX - dstX) == 1)
@@ -54,6 +56,19 @@ void Pawn::move(Board& board, const std::string dstCoords)
 		}
 		
 	}
+	if (this->getColor()==false && dstY == 0)
+	{
+		board.board[dstY][dstX] = new Queen('Q', dstCoords);
+		delete this;
+		return;
+	}
+	else if (this->getColor() == true && dstY == 7)
+	{
+		board.board[dstY][dstX] = new Queen('q', dstCoords);
+		delete this;
+		return;
+	}
+		
 	
 }
 
@@ -98,3 +113,5 @@ void Pawn::setFirstTurn(const bool state)
 {
 	_isFirstTurn = state;
 }
+
+

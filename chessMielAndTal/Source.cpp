@@ -7,7 +7,7 @@ in order to read and write information from and to the Backend
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
-#include "GameManager.h"
+
 using std::cout;
 using std::endl;
 using std::string;
@@ -58,7 +58,7 @@ void main()
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		
-		// YOUR CODE
+	
 		int res = g.mainGame(msgFromGraphics);
 		msgToGraphics[0] = (char)(res + '0');
 		msgToGraphics[1] = 0;

@@ -101,13 +101,15 @@ bool Board::checkmateCheck(const bool& kingColor)
 
 	for (int i = 0; i < possibleMovs; i++)
 	{
+		
 		if (isInBounds(kingX + kingMovs[i][1], kingY + kingMovs[i][0]))
 		{
+			newY = char(int(coordsKing[0]) + kingMovs[i][0]);
+			newX = char(int(coordsKing[1]) + kingMovs[i][1]);
+			resCoords = std::string(1, newY) + std::string(1, newX);
+
 			if (board[kingY + kingMovs[i][0]][kingX + kingMovs[i][1]]!=nullptr)
 			{
-				newY = char(int(coordsKing[0]) + kingMovs[i][0]);
-				newX = char(int(coordsKing[1]) + kingMovs[i][1]);
-				resCoords = std::string(1, newY) + std::string(1, newX);
 				if (board[kingY + kingMovs[i][0]][kingX + kingMovs[i][1]]->getColor() != kingColor)
 				{
 					newKing = new King(king->getType(), resCoords);
@@ -116,6 +118,15 @@ bool Board::checkmateCheck(const bool& kingColor)
 						delete newKing;
 						return false;
 					}
+				}
+			}
+			else
+			{
+				newKing = new King(king->getType(), resCoords);
+				if (!checkDanger(newKing)) //if there's at least one safe move for him
+				{
+					delete newKing;
+					return false;
 				}
 			}
 
