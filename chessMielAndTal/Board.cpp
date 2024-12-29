@@ -92,7 +92,7 @@ bool Board::checkmateCheck(const bool& kingColor)
 	char newX, newY;
 	std::string resCoords;
 	Piece* newKing = nullptr;
-	int kingMovs[8][2] = { {1,1},{1,0},{1,-1},{0,1},{0,-1},{-1,-1},{-1,0},{-1,1} };
+	int kingMovs[8][2] = {{1,1},{1,0},{1,-1},{0,1},{0,-1},{-1,-1},{-1,0},{-1,1} };
 	int possibleMovs = 8;
 	if (king == nullptr)
 		return false; 
@@ -136,6 +136,7 @@ bool Board::checkmateCheck(const bool& kingColor)
 	
 	return true;
 }
+
 
 
 bool Board::checkDanger(const Piece* king)
@@ -350,6 +351,8 @@ bool Board::diagonalCheck(const Piece* king, const int kingX, const int kingY)
 
 bool Board::kingDanger(const Piece* king, const int kingX, const int kingY)
 {
+	if (king == nullptr)
+		return false;
 	for (int i = kingY - 1; i <= kingY + 1; i++)
 	{
 		for (int j = kingX - 1; j <= kingX + 1; j++)
@@ -375,7 +378,7 @@ Piece* Board::findKing(const bool& color)
 			}
 		}
 	}
-	return nullptr;
+	return nullptr; //if there's no king
 }
 
 

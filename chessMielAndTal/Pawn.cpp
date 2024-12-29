@@ -56,17 +56,16 @@ void Pawn::move(Board& board, const std::string dstCoords)
 		}
 		
 	}
+	//promoting pawn if he reached the end
 	if (this->getColor()==false && dstY == 0)
 	{
 		board.board[dstY][dstX] = new Queen('Q', dstCoords);
 		delete this;
-		return;
 	}
 	else if (this->getColor() == true && dstY == 7)
 	{
 		board.board[dstY][dstX] = new Queen('q', dstCoords);
 		delete this;
-		return;
 	}
 		
 	

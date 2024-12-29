@@ -22,7 +22,6 @@ GameManager::GameManager():b(BUILD)
 	_currentPlayer = build[MAX_LEN - 1] - ASC_NUM_TO_NUM;
 
 	build.pop_back();
-	b.printBoard();
 
 }
 void GameManager::setCurrentPlayer(bool current)
@@ -48,8 +47,8 @@ int GameManager::mainGame(std::string inputCoords)
 		b.printBoard();
 		if (b.checkDanger(b.findKing(_currentPlayer)))
 		{
-			if (b.checkmateCheck((b.findKing(_currentPlayer)->getColor())))
-				return CHECKMATE;
+			/*if (b.checkmateCheck((b.findKing(_currentPlayer)->getColor())))
+				return CHECKMATE;*/
 			return CHECKS;
 		}
 		return NO_CHECKS;
@@ -106,3 +105,4 @@ bool GameManager::turnExpn(const std::string& coords, const Board& b)
 	}
 	
 }
+

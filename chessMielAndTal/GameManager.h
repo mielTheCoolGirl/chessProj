@@ -1,7 +1,7 @@
 #pragma once
 #include "Board.h"
 
-//defining current build for chessboard
+//defining current build for chessboard(we start with white)
 #define BUILD "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0"
 class GameManager
 {
@@ -14,4 +14,5 @@ public:
 	bool getCurrentPlayer()const;
 	void setCurrentPlayer(bool current);
 	int mainGame(std::string inputCoords);
+	
 };

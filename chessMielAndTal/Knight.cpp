@@ -31,13 +31,16 @@ void Knight::move(Board& board, const std::string dstCoords)
 	std::string originCoords = lettersToCoords(_currentCoords);
 	std::string destnationCoords = lettersToCoords(dstCoords);
 	std::string prevCoords = _currentCoords;
+
 	srcY = originCoords[0] - ASC_NUM_TO_NUM;
 	srcX = originCoords[1] - ASC_NUM_TO_NUM;
 	dstY = destnationCoords[0] - ASC_NUM_TO_NUM;
 	dstX = destnationCoords[1] - ASC_NUM_TO_NUM;
-	eaten = eat(board, destnationCoords);
+
+	
 	
 	king = board.findKing(board.board[srcY][srcX]->getColor());
+	eaten = eat(board, destnationCoords);
 	board.board[dstY][dstX] = board.board[srcY][srcX];
 	board.board[srcY][srcX] = nullptr;
 	board.board[dstY][dstX]->setCurrentCoords(dstCoords);

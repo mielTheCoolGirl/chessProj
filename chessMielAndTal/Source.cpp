@@ -60,6 +60,7 @@ void main()
 		
 	
 		int res = g.mainGame(msgFromGraphics);
+		
 		msgToGraphics[0] = (char)(res + '0');
 		msgToGraphics[1] = 0;
 		
