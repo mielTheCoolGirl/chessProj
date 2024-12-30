@@ -4,7 +4,8 @@
 #define BLACK 1
 #define WHITE 0
 #define PROMOTION 9
-
+#define B_ENP_LINE 4
+#define W_ENP_LINE 3
 
 
 
@@ -16,8 +17,8 @@ public:
 	Pawn(const char& pawnType, const std::string& coords);
 	~Pawn();
 
-	void move(Board& board, const std::string dstCoords) override;
+	void move(Board& b, const std::string dstCoords) override;
 	bool legalMovement(const Board& b, const std::string& dstCoords)const override;
 
-	
+	void turnOffFirstTurnFlag(Board& b, const bool& color);
 };
