@@ -39,8 +39,6 @@ public:
 	bool getColor()const;
 	void setColor(const bool& color);
 
-	Piece& operator=(const Piece& other);
-
 	bool getFirstTurn()const;
 	void setFirstTurn(const bool state);
 };

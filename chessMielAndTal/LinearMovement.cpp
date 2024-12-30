@@ -24,7 +24,7 @@ void LinearMovement::move(Board& b,const std::string dstCoords)
 	int dy = (dstY > srcY) ? 1 : (dstY < srcY) ? -1 : 0;
 	if (b.board[srcY][srcX] == nullptr)
 		throw(3);
-	king = b.findKing(b.board[srcY][srcX]->getColor());
+	
 	int x = srcX + dx;
 	int y = srcY + dy;
 
@@ -35,21 +35,20 @@ void LinearMovement::move(Board& b,const std::string dstCoords)
 		x += dx;
 		y += dy;
 	}
-	
+	king = b.findKing(b.board[srcY][srcX]->getColor());
 	eaten = eat(b, numDst);
 	b.board[dstY][dstX] = b.board[srcY][srcX];
 	b.board[srcY][srcX] = nullptr;
-	
-	
 	b.board[dstY][dstX]->setCurrentCoords(dstCoords); //new coords of piece
+
 	if (b.checkDanger(king)) //if king is checked
 	{
 		b.board[dstY][dstX]->setCurrentCoords(prevCoords);
 		b.board[srcY][srcX] = b.board[dstY][dstX];
 		b.board[dstY][dstX] = eaten;
-		delete eaten;
 		throw(4); //check expn
 	}
+	delete eaten;
 	
 	
 	

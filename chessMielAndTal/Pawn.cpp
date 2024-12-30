@@ -60,8 +60,8 @@ void Pawn::move(Board& b, const std::string dstCoords)
 			b.board[dstY][dstX] = eaten;
 			throw(4); //check expn
 		}
-		
 	}
+	delete eaten;
 
 	turnOffFirstTurnFlag(b, _color);
 

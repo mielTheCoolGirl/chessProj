@@ -44,7 +44,6 @@ std::string Piece::lettersToCoords(std::string letters) //a2 [6][0]
     int yAxis = BOARD_LEN - (letters[1] - ASC_NUM_TO_NUM);
     coords = std::to_string(yAxis);
     coords += std::to_string(letterToNum);
-    //return  std::to_string(yAxis) + std::to_string(letterToNum);
     return coords;
 }
 
@@ -77,20 +76,6 @@ bool Piece::getColor() const
 void Piece::setColor(const bool& color)
 {
     _color = color;
-}
-
-Piece& Piece::operator=(const Piece& other)
-{
-    if (this == &other)
-    {
-        return *this;
-    }
-
-    this->_color = other._color;
-    this->_type = other._type;
-    this->_currentCoords = other._currentCoords;
-
-    return *this;
 }
 
 bool Piece::getFirstTurn() const
