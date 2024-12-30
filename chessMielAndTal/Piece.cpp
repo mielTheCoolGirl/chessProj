@@ -35,8 +35,8 @@ Piece* Piece::eat(Board& b, const std::string& dstCoords)
     std::string numSrc = lettersToCoords(_currentCoords);
     std::string numDst = lettersToCoords(dstCoords);
 
-    int srcY = int(numSrc[0] - '0'), srcX = int(numSrc[1] - '0');
-    int dstY = int(numDst[0] - '0'), dstX = int(numDst[1] - '0');
+    int srcY = int(numSrc[0] - ASC_NUM_TO_NUM), srcX = int(numSrc[1] - ASC_NUM_TO_NUM);
+    int dstY = int(numDst[0] - ASC_NUM_TO_NUM), dstX = int(numDst[1] - ASC_NUM_TO_NUM);
     std::string prevCoords = _currentCoords;
     Piece* eaten = b.board[dstY][dstX];
     Piece* king = b.findKing(b.board[srcY][srcX]->getColor());
