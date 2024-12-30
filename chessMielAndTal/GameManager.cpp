@@ -47,8 +47,6 @@ int GameManager::mainGame(std::string inputCoords)
 		b.printBoard();
 		if (b.checkDanger(b.findKing(_currentPlayer)))
 		{
-			/*if (b.checkmateCheck((b.findKing(_currentPlayer)->getColor())))
-				return CHECKMATE;*/
 			return CHECKS;
 		}
 		return NO_CHECKS;

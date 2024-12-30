@@ -15,6 +15,15 @@ Piece::Piece(const char& type, const std::string& currentCoords):
     {
         _color = WHITE;
     }
+    if (tolower(type) == 'p')
+    {
+        _isFirstTurn = TRUE;
+    }
+    else
+    {
+        _isFirstTurn = FALSE;
+    }
+    
 }
 
 Piece::~Piece()
@@ -84,3 +93,12 @@ Piece& Piece::operator=(const Piece& other)
     return *this;
 }
 
+bool Piece::getFirstTurn() const
+{
+    return _isFirstTurn;
+}
+
+void Piece::setFirstTurn(const bool state)
+{
+    _isFirstTurn = state;
+}

@@ -3,7 +3,9 @@
 #include "Board.h"
 #define LOWER_LET_TO_NUM 97
 #define ASC_NUM_TO_NUM 48
-
+#define TRUE 2
+#define AFTER 1
+#define FALSE 0
 class Board;
 
 class Piece
@@ -12,6 +14,7 @@ protected:
 	char _type;
 	std::string _currentCoords;
 	bool _color; //true is white, false is black
+	int _isFirstTurn;
 public:
 	Piece(const char& type, const std::string& currentCoords);
 	virtual ~Piece();
@@ -37,4 +40,7 @@ public:
 	void setColor(const bool& color);
 
 	Piece& operator=(const Piece& other);
+
+	bool getFirstTurn()const;
+	void setFirstTurn(const bool state);
 };
