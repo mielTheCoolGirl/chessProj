@@ -30,10 +30,29 @@ Piece::~Piece()
 {
 }
 
-Piece* Piece::eat(Board& b, const std::string& targetCoords)
+Piece* Piece::eat(Board& b, const std::string& dstCoords)
 {
-    return b.board[int(targetCoords[0] - '0')][int(targetCoords[1] - '0')];
-    
+    std::string numSrc = lettersToCoords(_currentCoords);
+    std::string numDst = lettersToCoords(dstCoords);
+
+    int srcY = int(numSrc[0] - '0'), srcX = int(numSrc[1] - '0');
+    int dstY = int(numDst[0] - '0'), dstX = int(numDst[1] - '0');
+    std::string prevCoords = _currentCoords;
+    Piece* eaten = b.board[dstY][dstX];
+    Piece* king = b.findKing(b.board[srcY][srcX]->getColor());
+
+    b.board[dstY][dstX] = b.board[srcY][srcX];
+    b.board[srcY][srcX] = nullptr;
+    b.board[dstY][dstX]->setCurrentCoords(dstCoords); //new coords of piece
+
+    if (b.checkDanger(king)) //if king is checked
+    {
+        b.board[dstY][dstX]->setCurrentCoords(prevCoords);
+        b.board[srcY][srcX] = b.board[dstY][dstX];
+        b.board[dstY][dstX] = eaten;
+        throw(4); //check expn
+    }
+    delete eaten;
 }
 
 
@@ -78,12 +97,12 @@ void Piece::setColor(const bool& color)
     _color = color;
 }
 
-bool Piece::getFirstTurn() const
+int Piece::getFirstTurn() const
 {
     return _isFirstTurn;
 }
 
-void Piece::setFirstTurn(const bool state)
+void Piece::setFirstTurn(const int state)
 {
     _isFirstTurn = state;
 }

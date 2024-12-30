@@ -66,7 +66,7 @@ int GameManager::mainGame(std::string inputCoords)
 	
 
 
-bool GameManager::turnExpn(const std::string& coords, const Board& b)
+void GameManager::turnExpn(const std::string& coords, const Board& b)
 {
 	std::string numSrc = "";
 	std::string numDst = "";

@@ -11,31 +11,7 @@ King::~King()
 
 void King::move(Board& b, std::string dstCoords)
 {
-	int srcY, srcX, dstY, dstX;
-	std::string numDst = lettersToCoords(dstCoords);
-	std::string numSrc = lettersToCoords(_currentCoords);
-	std::string prevCoords = _currentCoords;
-	Piece* eaten = nullptr;
-	srcY = numSrc[0] - '0';
-	srcX = numSrc[1] - '0';
-	dstY = numDst[0] - '0';
-	dstX = numDst[1] - '0';
-
-	eaten = eat(b, numDst);
-	b.board[dstY][dstX] = b.board[srcY][srcX];
-	b.board[srcY][srcX] = nullptr;
-	b.board[dstY][dstX]->setCurrentCoords(dstCoords);
-
-	if (b.checkDanger(b.board[dstY][dstX])) //if king is checked
-	{
-		b.board[dstY][dstX]->setCurrentCoords(prevCoords);
-		b.board[srcY][srcX] = b.board[dstY][dstX];
-		b.board[dstY][dstX] = eaten;
-		throw(4); //check expn
-	}
-	delete eaten;
-	
-
+	eat(b, dstCoords);
 }
 
 bool King::legalMovement(const Board& board, const std::string& dstCoords) const

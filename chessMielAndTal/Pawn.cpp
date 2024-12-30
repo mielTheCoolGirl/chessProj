@@ -45,23 +45,13 @@ void Pawn::move(Board& b, const std::string dstCoords)
 			b.board[srcY][srcX + subX] = eaten;
 			throw(4); //check expn
 		}
+		delete eaten;
 	}
 	else
 	{
-		eaten = eat(b, destnationCoords);
-		b.board[dstY][dstX] = b.board[srcY][srcX];
-		b.board[srcY][srcX] = nullptr;
-		b.board[dstY][dstX]->setCurrentCoords(dstCoords);
-		//if the king of the current color is checked after movement
-		if (b.checkDanger(king))
-		{
-			b.board[dstY][dstX]->setCurrentCoords(prevCoords);
-			b.board[srcY][srcX] = b.board[dstY][dstX];
-			b.board[dstY][dstX] = eaten;
-			throw(4); //check expn
-		}
+		eat(b, dstCoords);
 	}
-	delete eaten;
+
 
 	turnOffFirstTurnFlag(b, _color);
 
@@ -98,8 +88,8 @@ bool Pawn::legalMovement(const Board& b, const std::string& dstCoords) const
 	if (abs(subX) == 1)
 	{
 		if (abs(subY) != 1 ||
-			b.board[dstY][dstX] == nullptr && (b.board[srcY][srcX + subX] == nullptr ||
-			b.board[srcY][srcX + subX]->getColor() != _color && b.board[srcY][srcX + subX]->getFirstTurn() != AFTER))
+			(b.board[dstY][dstX] == nullptr && (b.board[srcY][srcX + subX] == nullptr ||
+			!(b.board[srcY][srcX + subX]->getColor() != _color && b.board[srcY][srcX + subX]->getFirstTurn() == AFTER))))
 			return false;
 		return true;
 	}

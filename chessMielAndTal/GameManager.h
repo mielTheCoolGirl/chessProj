@@ -10,7 +10,7 @@ private:
 public:
 	Board b;
 	GameManager();
-	bool turnExpn(const std::string& coords, const Board& b);
+	void turnExpn(const std::string& coords, const Board& b);
 	bool getCurrentPlayer()const;
 	void setCurrentPlayer(bool current);
 	int mainGame(std::string inputCoords);
