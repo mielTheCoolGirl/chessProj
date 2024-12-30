@@ -24,7 +24,7 @@ public:
 	virtual bool legalMovement(const Board& board, const std::string& dstCoords) const = 0;
 
 	//moves on board
-	virtual void move(Board& board, const std::string dstCoords) =0;
+	virtual void move(Board& board, const std::string dstCoords);
 
 	
 	static std::string lettersToCoords(std::string letters);

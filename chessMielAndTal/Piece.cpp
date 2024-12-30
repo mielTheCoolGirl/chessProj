@@ -66,6 +66,10 @@ std::string Piece::lettersToCoords(std::string letters) //a2 [6][0]
     return coords;
 }
 
+void Piece::move(Board& b, std::string dstCoords)
+{
+    eat(b, dstCoords);
+}
 
 char Piece::getType() const
 {

@@ -23,7 +23,4 @@ bool Knight::legalMovement(const Board& board, const std::string& dstCoords) con
 	return false;
 }
 
-void Knight::move(Board& board, const std::string dstCoords)
-{ 	
-	eat(board, dstCoords);
-}
+
