@@ -1,6 +1,4 @@
 #include "LinearMovement.h"
-#include "Rook.h"
-class Rook;
 LinearMovement::LinearMovement(char linearPieceType, std::string coords) :  Piece(linearPieceType, coords)
 {
 
