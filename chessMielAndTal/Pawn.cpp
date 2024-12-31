@@ -89,7 +89,8 @@ bool Pawn::legalMovement(const Board& b, const std::string& dstCoords) const
 	{
 		if (abs(subY) != 1 ||
 			(b.board[dstY][dstX] == nullptr && (b.board[srcY][srcX + subX] == nullptr ||
-			!(b.board[srcY][srcX + subX]->getColor() != _color && b.board[srcY][srcX + subX]->getFirstTurn() == AFTER))))
+			!(b.board[srcY][srcX + subX]->getColor() != _color && b.board[srcY][srcX + subX]->getFirstTurn() == AFTER
+				&& (srcY == W_ENP_LINE || srcY == B_ENP_LINE)))))
 			return false;
 		return true;
 	}
