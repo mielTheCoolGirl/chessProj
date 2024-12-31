@@ -30,7 +30,7 @@ Piece::~Piece()
 {
 }
 
-Piece* Piece::eat(Board& b, const std::string& dstCoords)
+void Piece::eat(Board& b, const std::string& dstCoords)
 {
     std::string numSrc = lettersToCoords(_currentCoords);
     std::string numDst = lettersToCoords(dstCoords);
@@ -39,12 +39,13 @@ Piece* Piece::eat(Board& b, const std::string& dstCoords)
     int dstY = int(numDst[0] - ASC_NUM_TO_NUM), dstX = int(numDst[1] - ASC_NUM_TO_NUM);
     std::string prevCoords = _currentCoords;
     Piece* eaten = b.board[dstY][dstX];
-    Piece* king = b.findKing(b.board[srcY][srcX]->getColor());
+    Piece* king = nullptr;
 
     b.board[dstY][dstX] = b.board[srcY][srcX];
     b.board[srcY][srcX] = nullptr;
     b.board[dstY][dstX]->setCurrentCoords(dstCoords); //new coords of piece
 
+    king = b.findKing(b.board[dstY][dstX]->getColor());
     if (b.checkDanger(king)) //if king is checked
     {
         b.board[dstY][dstX]->setCurrentCoords(prevCoords);
